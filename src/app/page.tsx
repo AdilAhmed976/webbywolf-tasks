@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div>
       <MultiStepForm/>
-      <div>
+      <div className="flex items-center justify-center p-10 bg-gray-200">
         <Button
           onClick={() => {
             setEditOpen((prev) => !prev);

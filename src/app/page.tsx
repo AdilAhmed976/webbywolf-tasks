@@ -4,6 +4,7 @@
 
 import { EditPasswordDialog } from "@/components/edit-password-dialog";
 import { Button } from "@/components/ui/button";
+import MultiStepForm from "@/sections/multi-step-form";
 import { Edit } from "lucide-react";
 import { useState } from "react";
 
@@ -12,21 +13,24 @@ export default function Home() {
 
   return (
     <div>
-      <Button
-        onClick={() => {
-          setEditOpen((prev) => !prev);
-        }}
-      >
-        Edit Password <Edit />
-      </Button>
-      {editOpen && (
-        <EditPasswordDialog
-          open={editOpen}
-          setOpen={setEditOpen}
-          employeeId="employeeId"
-          employeeName="employeeName"
-        />
-      )}
+      <MultiStepForm/>
+      <div>
+        <Button
+          onClick={() => {
+            setEditOpen((prev) => !prev);
+          }}
+        >
+          Edit Password <Edit />
+        </Button>
+        {editOpen && (
+          <EditPasswordDialog
+            open={editOpen}
+            setOpen={setEditOpen}
+            employeeId="employeeId"
+            employeeName="employeeName"
+          />
+        )}
+      </div>
     </div>
   );
 }

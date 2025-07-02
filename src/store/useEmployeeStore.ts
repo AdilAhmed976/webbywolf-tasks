@@ -1,30 +1,35 @@
+// store/useEmployeeStore.ts
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
-// src/store/useEmployeeStore.ts
-import { create } from 'zustand'
-
-type Employee = {
-  fullName: string
-  email: string
-  phoneNumber: string
-  department: string
-  role: string
-  dateOfJoining: Date
-  employeeId: string
-  password: string // hashed
+interface Employee {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  department: string;
+  role: string;
+  dateOfJoining: Date;
+  employeeId: string;
+  password: string;
 }
 
-interface EmployeeState {
-  employees: Employee[]
-  addEmployee: (employee: Employee) => void
+interface EmployeeStore {
+  employees: Employee[];
+  addEmployee: (employee: Employee) => void;
 }
 
-export const useEmployeeStore = create<EmployeeState>(set => ({
-  employees: JSON.parse(localStorage.getItem('employees') || '[]'),
-  addEmployee: employee => {
-    set(state => {
-      const updated = [...state.employees, employee]
-      localStorage.setItem('employees', JSON.stringify(updated))
-      return { employees: updated }
-    })
-  },
-}))
+export const useEmployeeStore = create<EmployeeStore>()(
+  persist(
+    (set) => ({
+      employees: [],
+      addEmployee: (employee) => 
+        set((state) => ({ 
+          employees: [...state.employees, employee] 
+        })),
+    }),
+    {
+      name: 'employee-storage',
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+);

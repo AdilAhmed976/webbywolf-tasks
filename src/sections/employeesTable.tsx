@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -15,9 +15,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { EditPasswordDialog } from "@/components/edit-password-dialog";
+import { Edit } from "lucide-react";
+import { Employee } from "@/types/employees";
 
 const EmployeesTable = () => {
   const { employees } = useEmployeeStore();
+  const [editOpen, setEditOpen] = useState<boolean>(false);
+  const [currentEmployee, setEmployee] = useState<Employee | null>(null);
 
   return (
     <div className="">
@@ -51,10 +57,11 @@ const EmployeesTable = () => {
                   <TableHead className="w-[200px]">
                     Encrypted Password
                   </TableHead>
+                  <TableHead>Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {employees.map((employee, index) => (
+                {employees.map((employee: Employee, index: number) => (
                   <TableRow key={index}>
                     <TableCell className="flex items-center gap-2">
                       <Avatar>
@@ -79,11 +86,31 @@ const EmployeesTable = () => {
                     </TableCell>
                     <TableCell>{employee.employeeId}</TableCell>
                     <TableCell>{employee.password}</TableCell>
+                    <TableCell>
+                      <Button
+                      variant={"outline"}
+                        onClick={() => {
+                          setEmployee(employee);
+                          setEditOpen((prev: boolean) => !prev);
+                        }}
+                      >
+                        Edit Password <Edit />
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </div>
+
+          {editOpen && (
+            <EditPasswordDialog
+              open={editOpen && currentEmployee ? true : false}
+              setOpen={setEditOpen}
+              employeeId={currentEmployee?.employeeId || ""}
+              employeeName={currentEmployee?.fullName || ""}
+            />
+          )}
         </div>
       )}
     </div>

@@ -41,8 +41,8 @@ const EmployeesTable = () => {
           </Card>
         </div>
       ) : (
-        <div className="w-full p-10">
-          <div className="border rounded-lg shadow-lg">
+        <div className="w-full p-0">
+          <div className="">
             <Table>
               <TableCaption className="mb-4">
                 List of added employees
@@ -59,7 +59,7 @@ const EmployeesTable = () => {
                   <TableHead className="w-[200px]">
                     Encrypted Password
                   </TableHead>
-                  <TableHead className="sticky right-0 z-10 shadow-[inset_-2px_0_0_0_rgba(255,255,255,0.8)] dark:shadow-[inset_-2px_0_0_0_rgba(108,117,125,0.5)]">Actions</TableHead>
+                  <TableHead className="bg-white sticky right-0 z-10 shadow-[inset_-2px_0_0_0_rgba(255,255,255,0.8)] dark:shadow-[inset_-2px_0_0_0_rgba(108,117,125,0.5)]">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>

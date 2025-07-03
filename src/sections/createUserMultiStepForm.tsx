@@ -31,7 +31,6 @@ import { ArrowLeft, ArrowRight, CalendarIcon } from "lucide-react";
 import { PasswordInput } from "@/components/ui/password-input";
 import { format } from "date-fns";
 import { toast } from "sonner";
-import { hash } from "bcryptjs";
 import { useEmployeeStore } from "@/store/useEmployeeStore";
 import { hashPassword } from "@/lib/passwordUtils";
 

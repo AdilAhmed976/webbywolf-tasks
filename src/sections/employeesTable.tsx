@@ -19,10 +19,12 @@ import { Button } from "@/components/ui/button";
 import { EditPasswordDialog } from "@/components/edit-password-dialog";
 import { Edit } from "lucide-react";
 import { Employee } from "@/types/employees";
+import EditEmployeesSidebar from "@/components/editEmployeesSidebar";
 
 const EmployeesTable = () => {
   const { employees } = useEmployeeStore();
   const [editOpen, setEditOpen] = useState<boolean>(false);
+  const [editPasswordOpen, setEditPasswordOpen] = useState<boolean>(false);
   const [currentEmployee, setEmployee] = useState<Employee | null>(null);
 
   return (
@@ -45,7 +47,7 @@ const EmployeesTable = () => {
               <TableCaption className="mb-4">
                 List of added employees
               </TableCaption>
-              <TableHeader className="sticky top-0">
+              <TableHeader className="sticky top-0 bg-white z-10">
                 <TableRow>
                   <TableHead>Name</TableHead>
                   <TableHead>Email</TableHead>
@@ -57,7 +59,7 @@ const EmployeesTable = () => {
                   <TableHead className="w-[200px]">
                     Encrypted Password
                   </TableHead>
-                  <TableHead>Actions</TableHead>
+                  <TableHead className="sticky right-0 z-10 shadow-[inset_-2px_0_0_0_rgba(255,255,255,0.8)] dark:shadow-[inset_-2px_0_0_0_rgba(108,117,125,0.5)]">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -86,16 +88,25 @@ const EmployeesTable = () => {
                     </TableCell>
                     <TableCell>{employee.employeeId}</TableCell>
                     <TableCell>{employee.password}</TableCell>
-                    <TableCell>
+                    <TableCell className="sticky flex items-center gap-2 bg-white right-0 z-2 shadow-[inset_-2px_0_0_0_rgba(255,255,255,0.8)] dark:shadow-[inset_-2px_0_0_0_rgba(108,117,125,0.5)]">
                       <Button
-                      variant={"outline"}
+                        // variant={"outline"}
                         onClick={() => {
                           setEmployee(employee);
                           setEditOpen((prev: boolean) => !prev);
                         }}
                       >
-                        Edit Password <Edit />
+                        <Edit className="text-white" />
                       </Button>
+                      {/* <Button
+                        variant={"outline"}
+                        onClick={() => {
+                          setEmployee(employee);
+                          setEditPasswordOpen((prev: boolean) => !prev);
+                        }}
+                      >
+                        Edit Password <Edit />
+                      </Button> */}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -103,12 +114,19 @@ const EmployeesTable = () => {
             </Table>
           </div>
 
-          {editOpen && (
+          {editPasswordOpen && (
             <EditPasswordDialog
-              open={editOpen && currentEmployee ? true : false}
-              setOpen={setEditOpen}
+              open={editPasswordOpen && currentEmployee ? true : false}
+              setOpen={setEditPasswordOpen}
               employeeId={currentEmployee?.employeeId || ""}
               employeeName={currentEmployee?.fullName || ""}
+            />
+          )}
+          {editOpen && (
+            <EditEmployeesSidebar
+              open={editOpen && currentEmployee ? true : false}
+              setOpen={setEditOpen}
+              employee={currentEmployee}
             />
           )}
         </div>

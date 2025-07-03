@@ -33,6 +33,7 @@ import { format } from "date-fns";
 import { toast } from "sonner";
 import { hash } from "bcryptjs";
 import { useEmployeeStore } from "@/store/useEmployeeStore";
+import { hashPassword } from "@/lib/passwordUtils";
 
 const BasicInformationSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
@@ -114,7 +115,7 @@ const CreateUserMultiStepForm = () => {
     },
   });
 
-  const { addEmployee } = useEmployeeStore();
+  const { employees, addEmployee } = useEmployeeStore();
 
   const onSubmit = async (values: FormValues) => {
     console.log(
@@ -126,8 +127,22 @@ const CreateUserMultiStepForm = () => {
     if (stepper.isLast) {
       const allValues = form.getValues();
 
-      const hashedPassword = await hash(allValues?.password, 10);
-      const hashedConfirmPassword = await hash(allValues?.confirmPassword, 10);
+      const isUniqueEmployee = employees?.filter(
+        (el) => el.email === allValues?.email
+      );
+      if (isUniqueEmployee.length > 0) {
+        toast.error("Add Unique Email Id");
+        stepper.goTo("basic-information");
+        form?.setError("email", {
+          message: "Add aa Unique Email",
+        });
+        return;
+      }
+
+      const hashedPassword = await hashPassword(allValues?.password);
+      const hashedConfirmPassword = await hashPassword(
+        allValues?.confirmPassword
+      );
 
       const employeeData = {
         ...allValues,
@@ -304,7 +319,7 @@ function BasicInformationFormComponent() {
         name="phoneNumber"
         render={({ field }) => (
           <FormItem className="col-span-12 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start">
-            <FormLabel className="flex shrink-0">Password</FormLabel>
+            <FormLabel className="flex shrink-0">Phone</FormLabel>
             <div className="w-full">
               <FormControl>
                 <div className="relative w-full">
@@ -340,7 +355,7 @@ function JobDetailsFormComponent() {
               <FormControl>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="" />
+                    <SelectValue placeholder="Select Department" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="department1">Department 1</SelectItem>
@@ -364,7 +379,7 @@ function JobDetailsFormComponent() {
               <FormControl>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="" />
+                    <SelectValue placeholder="Select Role" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="admin">Admin</SelectItem>
@@ -393,7 +408,7 @@ function JobDetailsFormComponent() {
                   <PopoverTrigger asChild>
                     <Button
                       variant={"outline"}
-                      className="justify-start text-left font-normal w-full"
+                      className="justify-start text-left font-normal w-full h-11"
                     >
                       <CalendarIcon className="mr-2 h-4 w-4" />
                       {field.value ? (

@@ -9,12 +9,15 @@ import MultiStepForm from "@/sections/multi-step-form";
 import { Edit } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import PolicyDocumentView from "@/sections/PolicyDocumentView";
+
 
 export default function Home() {
   const [editOpen, setEditOpen] = useState<boolean>(false);
 
   return (
     <div>
+      <PolicyDocumentView />
       <CreateUserMultiStepForm />
 
       <div className="flex items-center justify-center p-10 bg-gray-200">

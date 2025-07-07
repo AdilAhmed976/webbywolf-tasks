@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import {
   Table,
@@ -9,6 +9,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Image from "next/image";
+import { useReactToPrint } from "react-to-print";
+import { Button } from "@/components/ui/button";
+import { Printer } from "lucide-react";
 
 interface ChannelPartnerDetails {
   company_name: string;
@@ -39,17 +42,18 @@ interface PersonalDetails {
   email_id: string;
   address: string;
   city: string;
+  district: string;
   state: string;
   pin_code: string;
 }
 
 interface PaymentDetails {
   base_plan_amount: string;
-  cost_amount: string;
-  sost_amount: string;
-  iost_amount: string;
+  cgst_amount: string;
+  sgst_amount: string;
+  igst_amount: string;
   gst_number: string;
-  total_amount: string;
+  total_plan_amount: string;
   amount_in_words: string;
 }
 
@@ -321,416 +325,556 @@ const PolicyDocumentView = () => {
       last_name: "JANGRA",
       mobile_no: "*****0997",
       email_id: "nav*******@gmail.com",
-      address: "H. NO 88, ISSA PUR",
+      address: "H. NO 88, ISSA PUR H. NO 88, ISSA PUR H. NO 88,",
       city: "NEW DELHI",
+      district: "",
       state: "DELHI",
       pin_code: "110073",
     },
     payment_details: {
       base_plan_amount: "839.83",
-      cost_amount: "75.85",
-      sost_amount: "75.85",
-      iost_amount: "-",
+      cgst_amount: "75.85",
+      sgst_amount: "75.85",
+      igst_amount: "-",
       gst_number: "If applicable",
-      total_amount: "991.00",
+      total_plan_amount: "991.00",
       amount_in_words: "Rupees Nine Hundred Ninety One Only",
     },
   };
-
+  const contentRef = useRef<HTMLDivElement>(null);
+  const reactToPrintFn = useReactToPrint({ contentRef });
   return (
-    <div className="max-w-5xl mx-auto p-4 bg-gray-50 min-h-screen">
-      <Card className="bg-white shadow-lg">
-        <CardHeader className="py-4 flex items-center justify-between">
-          <Image
-            src={
-              invoiceData?.channel_partner_details?.logo || "/images/hero.png"
-            }
-            height={100}
-            width={100}
-            alt={invoiceData?.channel_partner_details?.company_name}
-            className="w-16 h-16 md:h-20 md:w-20"
-          />
-          <div className="flex items-center justify-center gap-2">
+    <div className="max-w-3xl mx-auto p-4 bg-gray-50 min-h-screen">
+      <Button className="cursor-pointer" onClick={reactToPrintFn}>
+        <Printer /> Print
+      </Button>
+      <Card className="bg-white shadow-lg gap-2">
+        <div ref={contentRef}>
+          <style>
+            {`
+        @media print {
+          @page {
+            margin-top: 0.5cm;
+            margin-bottom: 0.5cm;
+            size: a4;
+          }
+          h2, h3 {
+            page-break-after: avoid;
+          }
+          .section {
+            page-break-inside: avoid;
+            margin-bottom: 1rem;
+          }
+         
+          ul {
+            page-break-inside: avoid;
+          }
+             /* Layout Protection */
+          .print-protect {
+            page-break-inside: avoid;
+            break-inside: avoid;
+          }
+          
+          /* Grid Systems */
+          // .grid  {
+          //    break-inside: avoid;
+          //   page-break-inside: avoid;
+          // }
+          
+          .grid-item {
+            break-inside: avoid;
+            page-break-inside: avoid;
+          }
+          
+          /* Tables */
+          // table {
+          //   width: 100%;
+          //   border-collapse: collapse;
+          //   break-inside: avoid;
+          // }
+          th, td {
+            font-size:9px;
+          }
+
+          h4, p, text {
+          font-size:9px
+          }
+        
+        }
+      `}
+          </style>
+          <CardHeader className="flex items-center justify-between pb-2">
             <Image
-              src={"/images/icon.png"}
-              height={100}
-              width={100}
-              alt="icon"
-              className="w-16 h-16 md:h-20 md:w-20"
+              src={
+                invoiceData?.channel_partner_details?.logo || "/images/hero.png"
+              }
+              height={60}
+              width={60}
+              alt={invoiceData?.channel_partner_details?.company_name}
+              className="w-12 h-12 md:h-16 md:w-16"
             />
-            <div>
-              <h2 className="text-lg md:text-xl font-bold">
-                Sure Drive Assist
-              </h2>
-              <h2 className="text-red-500 font-medium">Help At Every Mile</h2>
-            </div>
-          </div>
-        </CardHeader>
-
-        <CardContent className="p-6">
-          {/* Subscription Details */}
-          <div>
-            <div className="bg-[#fe0000] border border-black">
-              <p className="text-center text-white font-bold">
-                SUBSCRIPTION DETAILS
-              </p>
-            </div>
-            <Table className="border border-black ">
-              <TableHeader className="bg-[#ffffff]">
-                <TableRow className="border-b border-black">
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    Subscription Id
-                  </TableHead>
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    Plan Name
-                  </TableHead>
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    Subscription Issue Date
-                  </TableHead>
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    Plan Start Date
-                  </TableHead>
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    Plan End Date
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow className="bg-[#ffff00] border border-black">
-                  <TableCell className="text-xs text-center">
-                    {invoiceData.subscription_details.subscription_id}
-                  </TableCell>
-                  <TableCell className="text-xs text-center">
-                    {invoiceData.subscription_details.plan_name}
-                  </TableCell>
-                  <TableCell className="text-xs text-center">
-                    {invoiceData.subscription_details.subscription_issue_date}
-                  </TableCell>
-                  <TableCell className="text-xs text-center">
-                    {invoiceData.subscription_details.plan_start_date}
-                  </TableCell>
-                  <TableCell className="text-xs text-center">
-                    {invoiceData.subscription_details.plan_end_date}
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </div>
-
-          {/* Vehicle Details */}
-          <div>
-            <div className="bg-[#fe0000] border border-black">
-              <p className="text-center text-white font-bold">
-                VEHICLE DETAILS
-              </p>
-            </div>
-            <Table className="border border-black">
-              <TableHeader className="bg-[#ffffff]">
-                <TableRow className="border-b border-black">
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    vehicle_registration_number
-                  </TableHead>
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    manufacturer
-                  </TableHead>
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    model
-                  </TableHead>
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    engine_number
-                  </TableHead>
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    chassis_number
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell className="text-xs font-medium text-center border border-black">
-                    {invoiceData.vehicle_details.vehicle_registration_number}
-                  </TableCell>
-                  <TableCell className="text-xs font-medium text-center border border-black">
-                    {invoiceData.vehicle_details.manufacturer}
-                  </TableCell>
-                  <TableCell className="text-xs font-medium text-center border border-black">
-                    {invoiceData.vehicle_details.model}
-                  </TableCell>
-                  <TableCell className="text-xs font-medium text-center border border-black">
-                    {invoiceData.vehicle_details.engine_number}
-                  </TableCell>
-                  <TableCell className="text-xs font-medium text-center border border-black">
-                    {invoiceData.vehicle_details.chassis_number}
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </div>
-
-          {/* Personal Details */}
-          <div>
-            <div className="bg-[#fe0000] border border-black">
-              <p className="text-center text-white font-bold">
-                {" "}
-                PERSONAL DETAILS
-              </p>
-            </div>
-
-            <Table className="border border-black">
-              <TableHeader className="bg-[#ffffff]">
-                <TableRow className="border border-black">
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    first_name
-                  </TableHead>
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    middle_name
-                  </TableHead>
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    last_name
-                  </TableHead>
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    mobile_no
-                  </TableHead>
-                  <TableHead className="text-xs font-bold text-center border border-black">
-                    email_id
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow className="border-black">
-                  <TableCell className="text-xs font-medium text-center border border-black">
-                    {invoiceData.personal_details.first_name}
-                  </TableCell>
-                  <TableCell className="text-xs font-medium text-center border border-black">
-                    {invoiceData.personal_details.middle_name}
-                  </TableCell>
-                  <TableCell className="text-xs font-medium text-center border border-black">
-                    {invoiceData.personal_details.last_name}
-                  </TableCell>
-                  <TableCell className="text-xs font-medium text-center border border-black">
-                    {invoiceData.personal_details.mobile_no}
-                  </TableCell>
-                  <TableCell className="text-xs font-medium text-center border border-black">
-                    {invoiceData.personal_details.email_id}
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </div>
-          <Table className="border border-black">
-            <TableHeader className="bg-[#ffffff]">
-              <TableRow className="border border-black border-t-transparent">
-                <TableHead className="text-xs font-bold text-center border border-black">
-                  Address
-                </TableHead>
-                <TableHead className="text-xs font-bold text-center border border-black">
-                  City
-                </TableHead>
-                <TableHead className="text-xs font-bold text-center border border-black">
-                  State
-                </TableHead>
-                <TableHead className="text-xs font-bold text-center border border-black">
-                  Pin Code
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell>{invoiceData.personal_details.address}</TableCell>
-                <TableCell>{invoiceData.personal_details.city}</TableCell>
-                <TableCell>{invoiceData.personal_details.state}</TableCell>
-                <TableCell>{invoiceData.personal_details.pin_code}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-
-          {/* Payment Details */}
-          <div>
-            <div className="bg-[#fe0000] border border-black">
-              <p className="text-center text-white font-bold">
-                PAYMENT DETAILS
-              </p>
-            </div>
-
-            <Table className="border border-black">
-              {/* <TableHeader className="bg-gray-50">
-                  <TableRow>
-                    <TableHead className="w-[60%]">Description</TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
-                  </TableRow>
-                </TableHeader> */}
-              <TableBody>
-                <TableRow className="border border-black">
-                  <TableCell>Base Plan Amount</TableCell>
-                  <TableCell>
-                    {invoiceData.payment_details.base_plan_amount}
-                  </TableCell>
-                </TableRow>
-
-                <TableRow className="border border-black">
-                  <TableCell className="text-white py-[22px]"></TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-
-                <TableRow className="border border-black">
-                  <TableCell>Amount of COST (9%)</TableCell>
-                  <TableCell>
-                    {invoiceData.payment_details.cost_amount}
-                  </TableCell>
-                </TableRow>
-                <TableRow className="border border-black">
-                  <TableCell>Amount of SOST (9%)</TableCell>
-                  <TableCell>
-                    {invoiceData.payment_details.sost_amount}
-                  </TableCell>
-                </TableRow>
-                <TableRow className="border border-black">
-                  <TableCell>Amount of IOST (18%) if applicable</TableCell>
-                  <TableCell>
-                    {invoiceData.payment_details.iost_amount}
-                  </TableCell>
-                </TableRow>
-                <TableRow className="border-b border-black">
-                  <TableCell>GST No. of the Service Recipient</TableCell>
-                  <TableCell>
-                    {invoiceData.payment_details.gst_number}
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </div>
-          {/* Accident Support */}
-          <div>
-            <div className="bg-[#fe0000] border border-black">
-              <p className="text-center text-white font-bold">
-                ACCIDENTAL SUPPORT{" "}
-              </p>
-            </div>
-
-            <div className="text-sm border border-black p-2">
-              <p className="mb-3 mt-2">
-                In the event of an accident SureDrive Assist (SDA) shall provide
-                accident support services, along with supporting features such
-                as towing assistance medical emergency services (including
-                ambulance arrangements), and doctor assistance.
-              </p>
-              <p>
-                In case riders are not feeling well, SDA shall arrange for a
-                doctor consultation for
-                <span className="font-bold"> medical attention as well</span>.
-                For any assistance call our toll-free number:
-                <span className="font-bold text-red-600"> 1800-203-7601</span>
-              </p>
-            </div>
-            <div className="w-full flex justify-end p-2">
-              <text className="text-sm text-red-600 font-bold">
-                To Register Service Claim kindly scan the below QR code: OR
-                WHATSAPP CHAT
-              </text>
-            </div>
-          </div>
-          {/* SERVICE PROVIDER'S DETAILS Details */}
-          <div>
-            <div className="bg-[#fe0000] border border-black">
-              <p className="text-center text-white font-bold">
-                SERVICE PROVIDER &apos;S DETAILS
-              </p>
-            </div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-center gap-2">
+              <Image
+                src={"/images/icon.png"}
+                height={60}
+                width={60}
+                alt="icon"
+                className="w-12 h-12 md:h-16 md:w-16"
+              />
               <div>
-                <h4 className="font-bold text-lg">
-                  SureDrive Assist Private Limited
-                </h4>
-                <p className="text-sm">
-                  1607, 10th Floor, Vipul Business Park, Central Park II, Sector
-                  48, Gurugram, Haryana 122018
-                </p>
-                <p className="text-sm">support@suredriveassist.com</p>
-                <p className="text-sm">
-                  GSTNO: 06ABOCC8888A4F123 | CIN: U45209H50242PTC178595
-                </p>
-              </div>
-              <div className="p-2">
-                <div className="bg-gray-200 border-2 border-dashed rounded-xl w-32 h-32 mx-auto" />
+                <h2 className="text-md md:text-lg font-bold">
+                  Sure Drive Assist
+                </h2>
+                <h2 className="text-red-500 font-medium text-sm">
+                  Help At Every Mile
+                </h2>
               </div>
             </div>
-          </div>
+          </CardHeader>
 
-          {/* Partner Section */}
-          <div className="text-center mb-8">
-            <div className="bg-[#ffff00] border border-black">
-              <p className="text-center text-gray-900 font-bold p-1">
-                CHARMEL PARTNER -{" "}
-                <span className="uppercase">
-                  {invoiceData?.channel_partner_details?.company_name}{" "}
-                </span>
-              </p>
-            </div>
-          </div>
-
-          {/* Response Time */}
-          <div className="text-center mb-8">
-            <div className="border border-black">
-              <p className="text-center text-gray-900 font-bold p-1">
-                Guaranteed Response Time - 15 mins
-              </p>
-            </div>
-          </div>
-
-          {/* Services Section */}
-          <div>
-            <div className="bg-[#fe0000] border border-black">
-              <p className="text-center text-white font-bold">
-                {" "}
-                THE SERVICES PROVIDED UNDER THE ASSISTANCE ARE AS FOLLOWS:
-              </p>
-            </div>
-
-            <Table>
-              <TableHeader className="bg-[#ffffff]">
-                <TableRow>
-                  <TableHead className="p-[1px] font-bold">Sr. No</TableHead>
-                  <TableHead className="p-[1px] font-bold">SERVICES</TableHead>
-                  <TableHead className="p-[1px] font-bold">
-                    SURE SHIELD MAX
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {servicesData.map((service, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="border border-transparent text-sm font-medium p-[1px]">
-                      {service.id}
+          <CardContent>
+            {/* Subscription Details */}
+            <div>
+              <div className="bg-[#fe0000] border border-black">
+                <p className="text-center text-white font-semibold text-xs">
+                  SUBSCRIPTION DETAILS
+                </p>
+              </div>
+              <Table className="border border-black ">
+                <TableHeader className="bg-[#ffffff]">
+                  <TableRow className="border-b border-black">
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                      Subscription Id
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                      Plan Name
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                      Subscription Issue Date
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                      Plan Start Date
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                      Plan End Date
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow className="bg-[#ffff00] hover:bg-[#ffff00] border border-black">
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.subscription_details.subscription_id}
                     </TableCell>
-                    <TableCell className="border border-transparent text-sm font-medium p-[1px]">
-                      {service.name}
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.subscription_details.plan_name}
                     </TableCell>
-                    <TableCell className="border border-transparent text-sm font-medium p-[1px]">
-                      {service.value}
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.subscription_details.subscription_issue_date}
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.subscription_details.plan_start_date}
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.subscription_details.plan_end_date}
                     </TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
+                </TableBody>
+              </Table>
+            </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-4">
-            {services.map((service, index) => (
-              <div key={index} className="bg-white">
-                <div className="bg-[#fe0000]">
-                  <p className="text-white font-medium px-1">{service.title}</p>
+            {/* Vehicle Details */}
+            <div>
+              <div className="bg-[#fe0000] border border-black">
+                <p className="text-center text-white font-semibold text-xs">
+                  VEHICLE DETAILS
+                </p>
+              </div>
+              <Table className="border border-black">
+                <TableHeader className="bg-[#ffffff]">
+                  <TableRow className="border-b border-black">
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%] min-w-[20%]">
+                      Vehicle Registration Number
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%] min-w-[20%]">
+                      Manufacturer
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%] min-w-[20%]">
+                      Model
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%] min-w-[20%]">
+                      Engine Number
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%] min-w-[20%]">
+                      Chassis Number
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow className="bg-[#ffff00] hover:bg-[#ffff00] border border-black">
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.vehicle_details.vehicle_registration_number}
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.vehicle_details.manufacturer}
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.vehicle_details.model}
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.vehicle_details.engine_number}
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.vehicle_details.chassis_number}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+
+            {/* Personal Details */}
+            <div>
+              <div className="bg-[#fe0000] border border-black">
+                <p className="text-center text-white font-semibold text-xs">
+                  {" "}
+                  PERSONAL DETAILS
+                </p>
+              </div>
+
+              <Table className="border border-black">
+                <TableHeader className="bg-[#ffffff]">
+                  <TableRow className="border border-black">
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      First Name
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      Middle Name
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      Last Name
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      Mobile No
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      Email Id
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow className="bg-[#ffff00] hover:bg-[#ffff00] border border-black">
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.personal_details.first_name}
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.personal_details.middle_name}
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.personal_details.last_name}
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.personal_details.mobile_no}
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.personal_details.email_id}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+              <Table className="border border-black">
+                <TableHeader className="bg-[#ffffff]">
+                  <TableRow className="border border-black">
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                      Address
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                      City
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                      District
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                      State
+                    </TableHead>
+                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                      Pin Code
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow className="bg-[#ffff00] hover:bg-[#ffff00]">
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.personal_details.address}
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.personal_details.city}
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.personal_details.district}
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.personal_details.state}
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                      {invoiceData.personal_details.pin_code}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+
+            {/* Payment Details */}
+            <div>
+              <div className="bg-[#fe0000] border border-black">
+                <p className="text-center text-white font-semibold text-xs">
+                  PAYMENT DETAILS
+                </p>
+              </div>
+
+              <Table className="border border-black">
+                <TableHeader className="bg-gray-50">
+                  <TableRow>
+                    <TableHead className="w-[60%] py-0 h-0 border border-black border-b-transparent"></TableHead>
+                    <TableHead className="text-right py-0 h-0 border border-black border-b-transparent"></TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow className="border border-black py-0 h-auto">
+                    <TableCell className="text-xs font-medium border border-black py-0 h-auto">
+                      Base Plan Amount
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-right border border-black py-0.5 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
+                      {invoiceData.payment_details.base_plan_amount}
+                    </TableCell>
+                  </TableRow>
+
+                  {/* <TableRow className="border border-black py-0 h-auto">
+                  <TableCell className="text-white py-[2px] p-0 h-auto"></TableCell>
+                  <TableCell></TableCell>
+                </TableRow> */}
+
+                  <TableRow className="border border-black py-0.5 h-auto">
+                    <TableCell className="text-xs font-medium border border-black py-0.5 h-auto">
+                      Amount of CGST (9%)
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-right border border-black py-0.5 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
+                      {invoiceData.payment_details.cgst_amount}
+                    </TableCell>
+                  </TableRow>
+
+                  {/* <TableRow className="border border-black py-0 h-auto">
+                  <TableCell className="text-white py-[2px] p-0 h-auto"></TableCell>
+                  <TableCell></TableCell>
+                </TableRow> */}
+
+                  <TableRow className="border border-black py-0.5 h-auto">
+                    <TableCell className="text-xs font-medium border border-red-900 py-0.5 h-auto">
+                      Amount of SGST (9%)
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-right border border-black py-0.5 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
+                      {invoiceData.payment_details.sgst_amount}
+                    </TableCell>
+                  </TableRow>
+
+                  {/* <TableRow className="border border-black py-0 h-auto">
+                  <TableCell className="text-white py-[2px] p-0 h-auto"></TableCell>
+                  <TableCell></TableCell>
+                </TableRow> */}
+
+                  <TableRow className="border border-black py-0.5 h-auto">
+                    <TableCell className="text-xs font-medium border border-black py-0.5 h-auto">
+                      Amount of IGST (18%) if applicable
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-right border border-black py-0.5 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
+                      {invoiceData.payment_details.igst_amount}
+                    </TableCell>
+                  </TableRow>
+
+                  {/* <TableRow className="border border-black py-0 h-auto">
+                  <TableCell className="text-white py-[2px] p-0 h-auto"></TableCell>
+                  <TableCell></TableCell>
+                </TableRow> */}
+
+                  <TableRow className="border-b border-black">
+                    <TableCell className="text-xs font-medium border border-black py-0.5 h-auto">
+                      GST No. of the Service Recipient
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-right border border-black py-0.5 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
+                      {invoiceData.payment_details.gst_number}
+                    </TableCell>
+                  </TableRow>
+
+                  {/* <TableRow className="border border-black py-0 h-auto">
+                  <TableCell className="text-white py-[2px] p-0 h-auto"></TableCell>
+                  <TableCell></TableCell>
+                </TableRow> */}
+
+                  <TableRow className="border-b border-black">
+                    <TableCell className="text-xs font-medium border border-black py-0.5 h-auto">
+                      Total Plan Amount (Including GST)
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-right border border-black py-0.5 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
+                      {invoiceData.payment_details.total_plan_amount}
+                    </TableCell>
+                  </TableRow>
+
+                  {/* <TableRow className="border border-black py-0 h-auto">
+                  <TableCell className="text-white py-[2px] p-0 h-auto"></TableCell>
+                  <TableCell></TableCell>
+                </TableRow> */}
+
+                  <TableRow className="border-b border-black">
+                    <TableCell className="text-xs font-medium border border-black py-0.5 h-auto">
+                      Amount In Words
+                    </TableCell>
+                    <TableCell className="text-xs font-medium text-right border border-black py-0.5 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
+                      {invoiceData.payment_details.amount_in_words}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+            {/* Accident Support */}
+            <div>
+              <div className="bg-[#fe0000] border border-black">
+                <p className="text-center text-white font-semibold text-xs">
+                  ACCIDENTAL SUPPORT{" "}
+                </p>
+              </div>
+
+              <div className="text-xs border border-black p-2 font-medium space-y-1">
+                <p>
+                  In the event of an accident SureDrive Assist (SDA) shall
+                  provide accident support services, along with supporting
+                  features such as towing assistance medical emergency services
+                  (including ambulance arrangements), and doctor assistance.
+                </p>
+                <p>
+                  In case riders are not feeling well, SDA shall arrange for a
+                  doctor consultation for
+                  <span className="font-bold"> medical attention as well</span>.
+                  For any assistance call our toll-free number:
+                  <span className="font-bold text-red-600"> 1800-203-7601</span>
+                </p>
+              </div>
+              <div className="w-full flex justify-end p-1">
+                <text className="text-xs text-red-600 font-bold">
+                  To Register Service Claim kindly scan the below QR code: OR
+                  WHATSAPP CHAT
+                </text>
+              </div>
+            </div>
+            {/* SERVICE PROVIDER'S DETAILS Details */}
+            <div>
+              <div className="bg-[#fe0000] border border-black">
+                <p className="text-center text-white font-semibold text-xs">
+                  SERVICE PROVIDER &apos;S DETAILS
+                </p>
+              </div>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="font-bold text-sm">
+                    SureDrive Assist Private Limited
+                  </h4>
+                  <p className="text-xs font-medium">
+                    1607, 10th Floor, Vipul Business Park, Central Park II,
+                    Sector 48, Gurugram, Haryana 122018
+                  </p>
+                  <p className="text-xs font-medium">
+                    support@suredriveassist.com
+                  </p>
+                  <p className="text-xs font-medium">
+                    GSTNO: 06ABOCC8888A4F123 | CIN: U45209H50242PTC178595
+                  </p>
                 </div>
-                <div className="flex items-center mb-4 justify-between">
-                  <div className="text-3xl mr-4">{service.icon}</div>
-                  <div className="w-full">
-                    <h2 className="text-sm text-left font-medium text-left">
-                      {service.description}
-                    </h2>
+                <div className="p-2">
+                  <div className="bg-gray-200 border-2 border-dashed rounded-xl w-14 h-14 mx-auto" />
+                </div>
+              </div>
+            </div>
+
+            {/* Partner Section */}
+            <div className="text-center mb-2">
+              <div className="bg-[#ffff00] border border-black">
+                <p className="text-center text-gray-900 font-bold p-1 text-xs">
+                  CHARMEL PARTNER -{" "}
+                  <span className="uppercase">
+                    {invoiceData?.channel_partner_details?.company_name}{" "}
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            {/* Response Time */}
+            <div className="text-center mb-2">
+              <div className="border border-black">
+                <p className="text-center text-gray-900 font-bold p-1 text-sm">
+                  Guaranteed Response Time - 15 mins
+                </p>
+              </div>
+            </div>
+
+            {/* Services Section */}
+            <div>
+              <div className="bg-[#fe0000] border border-black">
+                <p className="text-center text-white font-semibold text-[10px]">
+                  {" "}
+                  THE SERVICES PROVIDED UNDER THE ASSISTANCE ARE AS FOLLOWS:
+                </p>
+              </div>
+
+              <Table>
+                <TableHeader className="bg-[#ffffff]">
+                  <TableRow>
+                    <TableHead className="p-[1px] font-bold h-auto text-xs">
+                      Sr. No
+                    </TableHead>
+                    <TableHead className="p-[1px] font-bold h-auto text-xs">
+                      SERVICES
+                    </TableHead>
+                    <TableHead className="p-[1px] font-bold h-auto text-xs">
+                      SURE SHIELD MAX
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {servicesData.map((service, index) => (
+                    <TableRow key={index}>
+                      <TableCell className="border border-transparent text-xs p-[1px] font-medium">
+                        {service.id}
+                      </TableCell>
+                      <TableCell className="border border-transparent text-xs p-[1px] font-medium">
+                        {service.name}
+                      </TableCell>
+                      <TableCell className="border border-transparent text-xs p-[1px] font-medium">
+                        {service.value}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
+              {services.map((service, index) => (
+                <div key={index} className="bg-white grid-item">
+                  <div className="bg-[#fe0000]">
+                    <p className="text-white font-medium px-1">
+                      {service.title}
+                    </p>
+                  </div>
+                  <div className="flex items-center mb-4 justify-between">
+                    <div className="text-3xl mr-4">{service.icon}</div>
+                    <div className="w-full">
+                      <h4 className="text-xs text-left font-medium text-left">
+                        {service.description}
+                      </h4>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
+              ))}
+            </div>
+          </CardContent>
+        </div>
       </Card>
     </div>
   );

@@ -403,7 +403,7 @@ const PolicyDocumentView = () => {
         }
       `}
           </style>
-          <CardHeader className="flex items-center justify-between pb-2">
+          <CardHeader className="flex items-center justify-between pb-4">
             <Image
               src={
                 invoiceData?.channel_partner_details?.logo || "/images/hero.png"

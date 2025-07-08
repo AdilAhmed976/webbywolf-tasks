@@ -351,81 +351,78 @@ const PolicyDocumentView = () => {
       invoiceData?.channel_partner_details?.company_name,
   });
 
-  const handlePrint = () => {
-    // Check if running on mobile
+const handlePrint = () => {
+  if (isMobile) {
+    if (contentRef.current) {
+      const iframe = document.createElement("iframe");
+      iframe.style.position = "fixed";
+      iframe.style.right = "0";
+      iframe.style.bottom = "0";
+      iframe.style.width = "0";
+      iframe.style.height = "0";
+      iframe.style.border = "0";
+      document.body.appendChild(iframe);
 
-    if (isMobile) {
-      // Create a new window/iframe for printing
-      const printWindow = window.open("", "_blank");
+      const doc = iframe.contentWindow?.document;
+      if (!doc) {
+        console.error("Unable to access iframe document");
+        return;
+      }
 
-      if (printWindow && contentRef.current) {
-        // Get all stylesheets from the current document
-        const styles = Array.from(document.styleSheets)
-          .map((styleSheet) => {
-            try {
-              if (styleSheet.cssRules) {
-                return Array.from(styleSheet.cssRules)
-                  .map((rule) => rule.cssText)
-                  .join("\n");
-              }
-              return null;
-            } catch (e) {
-              console.log("🚀 ~ .map ~ e:", e)
-              // Stylesheets from different origins will throw security errors
-              return null;
+      // Get styles from main document
+      const styles = Array.from(document.styleSheets)
+        .map((styleSheet) => {
+          try {
+            if (styleSheet.cssRules) {
+              return Array.from(styleSheet.cssRules)
+                .map((rule) => rule.cssText)
+                .join("\n");
             }
-          })
-          .filter(Boolean)
-          .join("\n");
+          } catch (e) {
+            console.warn("Access to stylesheet denied", e);
+          }
+          return "";
+        })
+        .join("\n");
 
-        // Clone your component content
-        const contentToPrint = contentRef.current.cloneNode(true) as Node;
+      const contentToPrint = contentRef.current.cloneNode(true) as HTMLElement;
 
-        // Set up the new document with all styles
-        printWindow.document.write(`
+      doc.open();
+      doc.write(`
         <!DOCTYPE html>
         <html>
           <head>
             <title>Print</title>
             <style>
               ${styles}
-              body { margin: 0; padding: 0; }
+              body { margin: 0; padding: 10px; }
               @media print {
                 body { -webkit-print-color-adjust: exact; }
               }
             </style>
           </head>
-          <body>
-            <div id="print-container"></div>
-          </body>
+          <body></body>
         </html>
       `);
+      doc.body.appendChild(contentToPrint);
+      doc.close();
 
-        // Append your content
-        const container =
-          printWindow.document.getElementById("print-container");
-        if (container) {
-          container.appendChild(contentToPrint);
-        }
+      // Give the iframe time to render before printing
+      setTimeout(() => {
+        iframe.contentWindow?.focus();
+        iframe.contentWindow?.print();
 
-        // Trigger print after content is loaded
-        printWindow.document.close();
-        printWindow.onload = function () {
-          printWindow.focus();
-          setTimeout(() => {
-            printWindow.print();
-            // Don't close immediately to allow printing
-            setTimeout(() => printWindow.close(), 500);
-          }, 300);
-        };
-      } else {
-        console.error("Print reference is null or window could not be opened");
-      }
-    } else {
-      // Use react-to-print for desktop browsers
-      reactToPrintFn();
+        // Clean up iframe after printing
+        setTimeout(() => {
+          document.body.removeChild(iframe);
+        }, 1000);
+      }, 500);
     }
-  };
+  } else {
+    reactToPrintFn();
+  }
+};
+
 
   return (
     <div className="max-w-3xl mx-auto p-4 bg-gray-50 min-h-screen">

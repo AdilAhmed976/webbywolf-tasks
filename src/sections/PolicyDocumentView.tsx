@@ -12,6 +12,7 @@ import Image from "next/image";
 import { useReactToPrint } from "react-to-print";
 import { Button } from "@/components/ui/button";
 import { SaveIcon } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface ChannelPartnerDetails {
   company_name: string;
@@ -341,6 +342,7 @@ const PolicyDocumentView = () => {
       amount_in_words: "Rupees Nine Hundred Ninety One Only",
     },
   };
+  const isMobile = useIsMobile();
   const contentRef = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({
     contentRef,
@@ -348,10 +350,87 @@ const PolicyDocumentView = () => {
       "rsa_subscription_print_policy_for_customer_" +
       invoiceData?.channel_partner_details?.company_name,
   });
+
+  const handlePrint = () => {
+    // Check if running on mobile
+
+    if (isMobile) {
+      // Create a new window/iframe for printing
+      const printWindow = window.open("", "_blank");
+
+      if (printWindow && contentRef.current) {
+        // Get all stylesheets from the current document
+        const styles = Array.from(document.styleSheets)
+          .map((styleSheet) => {
+            try {
+              if (styleSheet.cssRules) {
+                return Array.from(styleSheet.cssRules)
+                  .map((rule) => rule.cssText)
+                  .join("\n");
+              }
+              return null;
+            } catch (e) {
+              console.log("🚀 ~ .map ~ e:", e)
+              // Stylesheets from different origins will throw security errors
+              return null;
+            }
+          })
+          .filter(Boolean)
+          .join("\n");
+
+        // Clone your component content
+        const contentToPrint = contentRef.current.cloneNode(true) as Node;
+
+        // Set up the new document with all styles
+        printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Print</title>
+            <style>
+              ${styles}
+              body { margin: 0; padding: 0; }
+              @media print {
+                body { -webkit-print-color-adjust: exact; }
+              }
+            </style>
+          </head>
+          <body>
+            <div id="print-container"></div>
+          </body>
+        </html>
+      `);
+
+        // Append your content
+        const container =
+          printWindow.document.getElementById("print-container");
+        if (container) {
+          container.appendChild(contentToPrint);
+        }
+
+        // Trigger print after content is loaded
+        printWindow.document.close();
+        printWindow.onload = function () {
+          printWindow.focus();
+          setTimeout(() => {
+            printWindow.print();
+            // Don't close immediately to allow printing
+            setTimeout(() => printWindow.close(), 500);
+          }, 300);
+        };
+      } else {
+        console.error("Print reference is null or window could not be opened");
+      }
+    } else {
+      // Use react-to-print for desktop browsers
+      reactToPrintFn();
+    }
+  };
+
   return (
     <div className="max-w-3xl mx-auto p-4 bg-gray-50 min-h-screen">
       <div className="flex items-center justify-center p-3">
-        <Button className="cursor-pointer" onClick={reactToPrintFn}>
+        <Button className="cursor-pointer" onClick={handlePrint}>
           Save As PDF
           <SaveIcon />
         </Button>

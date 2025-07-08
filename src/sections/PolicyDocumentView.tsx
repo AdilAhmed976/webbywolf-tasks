@@ -206,63 +206,63 @@ const services = [
     title: "Vehicles Eligibility – Age Limit",
     description:
       "Valid for vehicles up to 7 years old. Misrepresentation may result in service cancellation.",
-    icon: "⏳",
+    icon: "🚫",
   },
   {
     title: "Unlocated or Unattended Vehicle",
     description:
       "Inaccurate location details or customer unavailability may lead to case closure.",
-    icon: "⏳",
+    icon: "🕵",
   },
   {
     title: "Off-Road Recovery",
     description:
       "Recovery service is chargeable. SDA is not liable for any damage during off-road recovery. Service is provided on a best-effort basis.",
-    icon: "⏳",
+    icon: "🏞️",
   },
   {
     title: "Additional Cases",
     description:
       "Towing or vehicle custody will be provided only after FIR clearance.",
-    icon: "⏳",
+    icon: "☝",
   },
   {
     title: "Excessive Usage & Misuse",
     description:
       "SDA may suspend services in case of abuse or misuse. Paid assistance may be offered as an alternative.",
-    icon: "⏳",
+    icon: "👩🏻‍💻",
   },
 
   {
     title: "Response Time & External Conditions",
     description:
       "SDA is not liable for delays caused by external factors beyond its control.",
-    icon: "⏳",
+    icon: "⏱️",
   },
   {
     title: "Inter-State Movement",
     description:
       "Customer is responsible for carrying valid documents, paying tolls, and bearing any legal risks.",
-    icon: "⏳",
+    icon: "〰",
   },
 
   {
     title: "Adverse Weather Conditions",
     description:
       "Service will be provided on a best-effort basis and may be deferred in unsafe conditions.",
-    icon: "⏳",
+    icon: "🌦️",
   },
   {
     title: "Special Exclusions",
     description:
       "Service will not be provided in cases of racing, vandalism, natural calamities, or similar events.",
-    icon: "⏳",
+    icon: "™",
   },
   {
     title: "Program Activation Date",
     description:
       "No wait time for new vehicles. For others, benefits begin 48 hours after plan purchase (cooling period).",
-    icon: "⏳",
+    icon: "🚌",
   },
   {
     title: "Program Validity & End Date",
@@ -342,7 +342,12 @@ const PolicyDocumentView = () => {
     },
   };
   const contentRef = useRef<HTMLDivElement>(null);
-  const reactToPrintFn = useReactToPrint({ contentRef });
+  const reactToPrintFn = useReactToPrint({
+    contentRef,
+    documentTitle:
+      "rsa_subscription_print_policy_for_customer_" +
+      invoiceData?.channel_partner_details?.company_name,
+  });
   return (
     <div className="max-w-3xl mx-auto p-4 bg-gray-50 min-h-screen">
       <Button className="cursor-pointer" onClick={reactToPrintFn}>
@@ -353,52 +358,55 @@ const PolicyDocumentView = () => {
           <style>
             {`
         @media print {
-          @page {
-            margin-top: 0.5cm;
-            margin-bottom: 0.5cm;
-            size: a4;
-          }
-          h2, h3 {
-            page-break-after: avoid;
-          }
-          .section {
-            page-break-inside: avoid;
-            margin-bottom: 1rem;
-          }
-         
-          ul {
-            page-break-inside: avoid;
-          }
-             /* Layout Protection */
-          .print-protect {
-            page-break-inside: avoid;
-            break-inside: avoid;
-          }
+            html, body {
+              -webkit-print-color-adjust: exact;
+            }
+            @page {
+              margin-top: 0.5cm;
+              margin-bottom: 0.5cm;
+              size: a4;
+            }
+            h2, h3 {
+              page-break-after: avoid;
+            }
+            .section {
+              page-break-inside: avoid;
+              margin-bottom: 1rem;
+            }
           
-          /* Grid Systems */
-          // .grid  {
-          //    break-inside: avoid;
-          //   page-break-inside: avoid;
-          // }
-          
-          .grid-item {
-            break-inside: avoid;
-            page-break-inside: avoid;
-          }
-          
-          /* Tables */
-          // table {
-          //   width: 100%;
-          //   border-collapse: collapse;
-          //   break-inside: avoid;
-          // }
-          th, td {
-            font-size:9px;
-          }
+            ul {
+              page-break-inside: avoid;
+            }
+              /* Layout Protection */
+            .print-protect {
+              page-break-inside: avoid;
+              break-inside: avoid;
+            }
+            
+            /* Grid Systems */
+            // .grid  {
+            //    break-inside: avoid;
+            //   page-break-inside: avoid;
+            // }
+            
+            .grid-item {
+              break-inside: avoid;
+              page-break-inside: avoid;
+            }
+            
+            /* Tables */
+            // table {
+            //   width: 100%;
+            //   border-collapse: collapse;
+            //   break-inside: avoid;
+            // }
+            th, td {
+              font-size:9px;
+            }
 
-          h4, p, text {
-          font-size:9px
-          }
+            h4, p, text {
+            font-size:9px
+            }
         
         }
       `}
@@ -436,45 +444,45 @@ const PolicyDocumentView = () => {
             {/* Subscription Details */}
             <div>
               <div className="bg-[#fe0000] border border-black">
-                <p className="text-center text-white font-semibold text-xs">
+                <p className="text-center text-white font-semibold text-sm sm:text-xs">
                   SUBSCRIPTION DETAILS
                 </p>
               </div>
               <Table className="border border-black ">
                 <TableHeader className="bg-[#ffffff]">
                   <TableRow className="border-b border-black">
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto">
                       Subscription Id
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto">
                       Plan Name
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto">
                       Subscription Issue Date
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto">
                       Plan Start Date
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto">
                       Plan End Date
                     </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   <TableRow className="bg-[#ffff00] hover:bg-[#ffff00] border border-black">
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.subscription_details.subscription_id}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.subscription_details.plan_name}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.subscription_details.subscription_issue_date}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.subscription_details.plan_start_date}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.subscription_details.plan_end_date}
                     </TableCell>
                   </TableRow>
@@ -485,45 +493,45 @@ const PolicyDocumentView = () => {
             {/* Vehicle Details */}
             <div>
               <div className="bg-[#fe0000] border border-black">
-                <p className="text-center text-white font-semibold text-xs">
+                <p className="text-center text-white font-semibold text-sm sm:text-xs">
                   VEHICLE DETAILS
                 </p>
               </div>
               <Table className="border border-black">
                 <TableHeader className="bg-[#ffffff]">
                   <TableRow className="border-b border-black">
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%] min-w-[20%]">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       Vehicle Registration Number
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%] min-w-[20%]">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       Manufacturer
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%] min-w-[20%]">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       Model
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%] min-w-[20%]">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       Engine Number
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%] min-w-[20%]">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       Chassis Number
                     </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   <TableRow className="bg-[#ffff00] hover:bg-[#ffff00] border border-black">
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.vehicle_details.vehicle_registration_number}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.vehicle_details.manufacturer}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.vehicle_details.model}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.vehicle_details.engine_number}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]]">
                       {invoiceData.vehicle_details.chassis_number}
                     </TableCell>
                   </TableRow>
@@ -534,7 +542,7 @@ const PolicyDocumentView = () => {
             {/* Personal Details */}
             <div>
               <div className="bg-[#fe0000] border border-black">
-                <p className="text-center text-white font-semibold text-xs">
+                <p className="text-center text-white font-semibold text-sm sm:text-xs">
                   {" "}
                   PERSONAL DETAILS
                 </p>
@@ -543,38 +551,38 @@ const PolicyDocumentView = () => {
               <Table className="border border-black">
                 <TableHeader className="bg-[#ffffff]">
                   <TableRow className="border border-black">
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       First Name
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       Middle Name
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       Last Name
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       Mobile No
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       Email Id
                     </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   <TableRow className="bg-[#ffff00] hover:bg-[#ffff00] border border-black">
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.personal_details.first_name}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.personal_details.middle_name}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.personal_details.last_name}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.personal_details.mobile_no}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.personal_details.email_id}
                     </TableCell>
                   </TableRow>
@@ -583,38 +591,38 @@ const PolicyDocumentView = () => {
               <Table className="border border-black">
                 <TableHeader className="bg-[#ffffff]">
                   <TableRow className="border border-black">
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto">
                       Address
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto">
                       City
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto">
                       District
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto">
                       State
                     </TableHead>
-                    <TableHead className="text-xs font-bold text-center border border-black py-0 h-auto">
+                    <TableHead className="text-sm sm:text-xs font-bold text-center border border-black py-2 sm:py-0 h-auto">
                       Pin Code
                     </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   <TableRow className="bg-[#ffff00] hover:bg-[#ffff00]">
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.personal_details.address}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.personal_details.city}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.personal_details.district}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.personal_details.state}
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-center border border-black py-0 h-auto whitespace-normal w-[20%]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-center border border-black py-2 sm:py-0 h-auto sm:whitespace-normal sm:w-[20%]">
                       {invoiceData.personal_details.pin_code}
                     </TableCell>
                   </TableRow>
@@ -625,7 +633,7 @@ const PolicyDocumentView = () => {
             {/* Payment Details */}
             <div>
               <div className="bg-[#fe0000] border border-black">
-                <p className="text-center text-white font-semibold text-xs">
+                <p className="text-center text-white font-semibold text-sm sm:text-xs">
                   PAYMENT DETAILS
                 </p>
               </div>
@@ -638,95 +646,95 @@ const PolicyDocumentView = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow className="border border-black py-0 h-auto">
-                    <TableCell className="text-xs font-medium border border-black py-0 h-auto">
+                  <TableRow className="border border-black py-2 sm:py-0 h-auto">
+                    <TableCell className="text-sm sm:text-xs font-medium border border-black py-2 sm:py-0 h-auto">
                       Base Plan Amount
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-right border border-black py-0.5 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-right border border-black py-2 sm:py-0 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
                       {invoiceData.payment_details.base_plan_amount}
                     </TableCell>
                   </TableRow>
 
-                  {/* <TableRow className="border border-black py-0 h-auto">
+                  {/* <TableRow className="border border-black py-2 sm:py-0 h-auto">
                   <TableCell className="text-white py-[2px] p-0 h-auto"></TableCell>
                   <TableCell></TableCell>
                 </TableRow> */}
 
-                  <TableRow className="border border-black py-0.5 h-auto">
-                    <TableCell className="text-xs font-medium border border-black py-0.5 h-auto">
+                  <TableRow className="border border-black py-2 sm:py-0 h-auto">
+                    <TableCell className="text-sm sm:text-xs font-medium border border-black py-2 sm:py-0 h-auto">
                       Amount of CGST (9%)
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-right border border-black py-0.5 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-right border border-black py-2 sm:py-0 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
                       {invoiceData.payment_details.cgst_amount}
                     </TableCell>
                   </TableRow>
 
-                  {/* <TableRow className="border border-black py-0 h-auto">
+                  {/* <TableRow className="border border-black py-2 sm:py-0 h-auto">
                   <TableCell className="text-white py-[2px] p-0 h-auto"></TableCell>
                   <TableCell></TableCell>
                 </TableRow> */}
 
-                  <TableRow className="border border-black py-0.5 h-auto">
-                    <TableCell className="text-xs font-medium border border-red-900 py-0.5 h-auto">
+                  <TableRow className="border border-black py-2 sm:py-0 h-auto">
+                    <TableCell className="text-sm sm:text-xs font-medium border border-red-900 py-2 sm:py-0 h-auto">
                       Amount of SGST (9%)
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-right border border-black py-0.5 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-right border border-black py-2 sm:py-0 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
                       {invoiceData.payment_details.sgst_amount}
                     </TableCell>
                   </TableRow>
 
-                  {/* <TableRow className="border border-black py-0 h-auto">
+                  {/* <TableRow className="border border-black py-2 sm:py-0 h-auto">
                   <TableCell className="text-white py-[2px] p-0 h-auto"></TableCell>
                   <TableCell></TableCell>
                 </TableRow> */}
 
-                  <TableRow className="border border-black py-0.5 h-auto">
-                    <TableCell className="text-xs font-medium border border-black py-0.5 h-auto">
+                  <TableRow className="border border-black py-2 sm:py-0 h-auto">
+                    <TableCell className="text-sm sm:text-xs font-medium border border-black py-2 sm:py-0 h-auto">
                       Amount of IGST (18%) if applicable
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-right border border-black py-0.5 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-right border border-black py-2 sm:py-0 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
                       {invoiceData.payment_details.igst_amount}
                     </TableCell>
                   </TableRow>
 
-                  {/* <TableRow className="border border-black py-0 h-auto">
+                  {/* <TableRow className="border border-black py-2 sm:py-0 h-auto">
                   <TableCell className="text-white py-[2px] p-0 h-auto"></TableCell>
                   <TableCell></TableCell>
                 </TableRow> */}
 
                   <TableRow className="border-b border-black">
-                    <TableCell className="text-xs font-medium border border-black py-0.5 h-auto">
+                    <TableCell className="text-sm sm:text-xs font-medium border border-black py-2 sm:py-0 h-auto">
                       GST No. of the Service Recipient
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-right border border-black py-0.5 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-right border border-black py-2 sm:py-0 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
                       {invoiceData.payment_details.gst_number}
                     </TableCell>
                   </TableRow>
 
-                  {/* <TableRow className="border border-black py-0 h-auto">
+                  {/* <TableRow className="border border-black py-2 sm:py-0 h-auto">
                   <TableCell className="text-white py-[2px] p-0 h-auto"></TableCell>
                   <TableCell></TableCell>
                 </TableRow> */}
 
                   <TableRow className="border-b border-black">
-                    <TableCell className="text-xs font-medium border border-black py-0.5 h-auto">
+                    <TableCell className="text-sm sm:text-xs font-medium border border-black py-2 sm:py-0 h-auto">
                       Total Plan Amount (Including GST)
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-right border border-black py-0.5 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-right border border-black py-2 sm:py-0 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
                       {invoiceData.payment_details.total_plan_amount}
                     </TableCell>
                   </TableRow>
 
-                  {/* <TableRow className="border border-black py-0 h-auto">
+                  {/* <TableRow className="border border-black py-2 sm:py-0 h-auto">
                   <TableCell className="text-white py-[2px] p-0 h-auto"></TableCell>
                   <TableCell></TableCell>
                 </TableRow> */}
 
                   <TableRow className="border-b border-black">
-                    <TableCell className="text-xs font-medium border border-black py-0.5 h-auto">
+                    <TableCell className="text-sm sm:text-xs font-medium border border-black py-2 sm:py-0 h-auto">
                       Amount In Words
                     </TableCell>
-                    <TableCell className="text-xs font-medium text-right border border-black py-0.5 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
+                    <TableCell className="text-sm sm:text-xs font-medium text-right border border-black py-2 sm:py-0 h-auto bg-[#ffff00] hover:bg-[#ffff00]">
                       {invoiceData.payment_details.amount_in_words}
                     </TableCell>
                   </TableRow>
@@ -736,12 +744,12 @@ const PolicyDocumentView = () => {
             {/* Accident Support */}
             <div>
               <div className="bg-[#fe0000] border border-black">
-                <p className="text-center text-white font-semibold text-xs">
+                <p className="text-center text-white font-semibold text-sm sm:text-xs">
                   ACCIDENTAL SUPPORT{" "}
                 </p>
               </div>
 
-              <div className="text-xs border border-black p-2 font-medium space-y-1">
+              <div className="text-sm sm:text-xs border border-black p-2 font-medium space-y-1">
                 <p>
                   In the event of an accident SureDrive Assist (SDA) shall
                   provide accident support services, along with supporting
@@ -757,7 +765,7 @@ const PolicyDocumentView = () => {
                 </p>
               </div>
               <div className="w-full flex justify-end p-1">
-                <text className="text-xs text-red-600 font-bold">
+                <text className="text-sm sm:text-xs text-red-600 font-bold">
                   To Register Service Claim kindly scan the below QR code: OR
                   WHATSAPP CHAT
                 </text>
@@ -766,7 +774,7 @@ const PolicyDocumentView = () => {
             {/* SERVICE PROVIDER'S DETAILS Details */}
             <div>
               <div className="bg-[#fe0000] border border-black">
-                <p className="text-center text-white font-semibold text-xs">
+                <p className="text-center text-white font-semibold text-sm sm:text-xs">
                   SERVICE PROVIDER &apos;S DETAILS
                 </p>
               </div>
@@ -775,14 +783,14 @@ const PolicyDocumentView = () => {
                   <h4 className="font-bold text-sm">
                     SureDrive Assist Private Limited
                   </h4>
-                  <p className="text-xs font-medium">
+                  <p className="text-sm sm:text-xs font-medium">
                     1607, 10th Floor, Vipul Business Park, Central Park II,
                     Sector 48, Gurugram, Haryana 122018
                   </p>
-                  <p className="text-xs font-medium">
+                  <p className="text-sm sm:text-xs font-medium">
                     support@suredriveassist.com
                   </p>
-                  <p className="text-xs font-medium">
+                  <p className="text-sm sm:text-xs font-medium">
                     GSTNO: 06ABOCC8888A4F123 | CIN: U45209H50242PTC178595
                   </p>
                 </div>
@@ -795,7 +803,7 @@ const PolicyDocumentView = () => {
             {/* Partner Section */}
             <div className="text-center mb-2">
               <div className="bg-[#ffff00] border border-black">
-                <p className="text-center text-gray-900 font-bold p-1 text-xs">
+                <p className="text-center text-gray-900 font-bold p-1 text-sm sm:text-xs">
                   CHARMEL PARTNER -{" "}
                   <span className="uppercase">
                     {invoiceData?.channel_partner_details?.company_name}{" "}
@@ -825,13 +833,13 @@ const PolicyDocumentView = () => {
               <Table>
                 <TableHeader className="bg-[#ffffff]">
                   <TableRow>
-                    <TableHead className="p-[1px] font-bold h-auto text-xs">
+                    <TableHead className="p-[1px] font-bold h-auto text-sm sm:text-xs">
                       Sr. No
                     </TableHead>
-                    <TableHead className="p-[1px] font-bold h-auto text-xs">
+                    <TableHead className="p-[1px] font-bold h-auto text-sm sm:text-xs">
                       SERVICES
                     </TableHead>
-                    <TableHead className="p-[1px] font-bold h-auto text-xs">
+                    <TableHead className="p-[1px] font-bold h-auto text-sm sm:text-xs">
                       SURE SHIELD MAX
                     </TableHead>
                   </TableRow>
@@ -839,13 +847,13 @@ const PolicyDocumentView = () => {
                 <TableBody>
                   {servicesData.map((service, index) => (
                     <TableRow key={index}>
-                      <TableCell className="border border-transparent text-xs p-[1px] font-medium">
+                      <TableCell className="border border-transparent text-sm sm:text-xs p-[1px] font-medium">
                         {service.id}
                       </TableCell>
-                      <TableCell className="border border-transparent text-xs p-[1px] font-medium">
+                      <TableCell className="border border-transparent text-sm sm:text-xs p-[1px] font-medium">
                         {service.name}
                       </TableCell>
-                      <TableCell className="border border-transparent text-xs p-[1px] font-medium">
+                      <TableCell className="border border-transparent text-sm sm:text-xs p-[1px] font-medium">
                         {service.value}
                       </TableCell>
                     </TableRow>
@@ -854,7 +862,7 @@ const PolicyDocumentView = () => {
               </Table>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
               {services.map((service, index) => (
                 <div key={index} className="bg-white grid-item">
                   <div className="bg-[#fe0000]">
@@ -865,7 +873,7 @@ const PolicyDocumentView = () => {
                   <div className="flex items-center mb-4 justify-between">
                     <div className="text-3xl mr-4">{service.icon}</div>
                     <div className="w-full">
-                      <h4 className="text-xs text-left font-medium text-left">
+                      <h4 className="text-sm sm:text-xs text-left font-medium text-left">
                         {service.description}
                       </h4>
                     </div>

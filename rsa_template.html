@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>RSA Policy Document</title>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            height: 60px;
+        }
+
+        .header-brand {
+            text-align: right;
+        }
+
+        .header-brand-name {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .header-brand-tagline {
+            color: red;
+            font-size: 12px;
+        }
+
+        /* Section Styles */
+        .section-title {
+            background-color: #fe0000;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 5px;
+            border: 1px solid black;
+            margin: 0px;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .yellow-cell {
+            background-color: #ffff00;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        /* Service Box Styles */
+        .service-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .service-box {
+            border: 1px solid #ddd;
+            background-color: white;
+        }
+
+        .service-box-title {
+            background-color: #fe0000;
+            color: white;
+            padding: 6px 8px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .service-box-content {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+        }
+
+        .service-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .service-description {
+            font-size: 12px;
+            text-align: left;
+        }
+
+        /* Special Sections */
+        .partner-section {
+            background-color: #ffff00;
+            padding: 5px;
+            border: 1px solid black;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .response-time {
+            text-align: center;
+            padding: 5px;
+            border: 1px solid black;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .accident-support {
+            border: 1px solid black;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .register-text {
+            text-align: right;
+            font-weight: bold;
+            color: red;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .grid-item {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .grid-item-header {
+            background-color: #fe0000;
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+            font-size: 12px;
+        }
+
+        .header {
+            background-color: #fe0000;
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .content {
+            display: flex;
+            padding: 15px;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .description {
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .w-20-percent {
+            width: 20%;
+        }
+
+        .border-none {
+            border: none;
+        }
+
+        @media print {
+
+            html,
+            body {
+                -webkit-print-color-adjust: exact;
+            }
+
+            section {
+                page-break-inside: avoid;
+            }
+
+        }
+
+        /* ===== Padding ===== */
+        .p-1 {
+            padding: 0.25rem;
+        }
+
+        .p-2 {
+            padding: 0.5rem;
+        }
+
+        .p-4 {
+            padding: 1rem;
+        }
+
+        .pt-2 {
+            padding-top: 0.5rem;
+        }
+
+        .pb-2 {
+            padding-bottom: 0.5rem;
+        }
+
+        .px-2 {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        /* ===== Margin ===== */
+        .m-2 {
+            margin: 0.5rem;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .mx-2 {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .my-2 {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== Flex Utilities ===== */
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .flex-row {
+            flex-direction: row;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        /* ===== Border ===== */
+        .border {
+            border: 1px solid #000;
+        }
+
+        .border-black {
+            border-color: black;
+        }
+
+        .border-red {
+            border-color: red;
+        }
+
+        .rounded {
+            border-radius: 0.25rem;
+        }
+
+        .rounded-md {
+            border-radius: 0.375rem;
+        }
+
+        /* ===== Text Alignment ===== */
+        .text-left {
+            text-align: left;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        /* ===== Font Size ===== */
+        .text-xs {
+            font-size: 0.75rem;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+        }
+
+        .text-base {
+            font-size: 1rem;
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+        }
+
+        /* ===== Font Weight ===== */
+        .font-normal {
+            font-weight: 400;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        /* ===== Height & Width ===== */
+        .h-auto {
+            height: auto;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .w-1\/2 {
+            width: 50%;
+        }
+
+        .w-20pct {
+            width: 20%;
+        }
+
+        /* Custom: for sm:w-[20%] equivalent */
+
+        /* ===== Whitespace Handling ===== */
+        .whitespace-nowrap {
+            white-space: nowrap;
+        }
+
+        .whitespace-normal {
+            white-space: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <img src="{{ CHANNEL_PARTNER_LOGO }}" alt="Channel Partner Logo" class="header-logo" />
+            <div class="header-brand">
+                <img src="{{ SDA_LOGO }}" alt="SDA Logo" class="header-logo" />
+            </div>
+        </header>
+
+        <!-- Subscription Details -->
+        <section>
+            <p class="section-title">SUBSCRIPTION DETAILS</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subscription Id</th>
+                        <th>Plan Name</th>
+                        <th>Subscription Issue Date</th>
+                        <th>Plan Start Date</th>
+                        <th>Plan End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="yellow-cell">
+                        <td class="w-20-percent">{{ SUBSCRIPTION_ID }}</td>
+                        <td class="w-20-percent">{{ PLAN_NAME }}</td>
+                        <td class="w-20-percent">{{ SUBSCRIPTION_ISSUE_DATE }}</td>
+                        <td class="w-20-percent">{{ PLAN_START_DATE }}</td>
+                        <td class="w-20-percent">{{ PLAN_END_DATE }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Vehicle Details -->
+        <section>
+            <p class="section-title">VEHICLE DETAILS</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="w-20-percent">Vehicle Registration Number</th>
+                        <th class="w-20-percent">Manufacturer</th>
+                        <th class="w-20-percent">Model</th>
+                        <th class="w-20-percent">Engine Number</th>
+                        <th class="w-20-percent">Chassis Number</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="yellow-cell">
+                        <td class="w-20-percent">{{ VEHICLE_REGISTRATION_NUMBER}}</td>
+                        <td class="w-20-percent">{{ MANUFACTURER }}</td>
+                        <td class="w-20-percent">{{ MODEL }}</td>
+                        <td class="w-20-percent">{{ ENGINE_NUMBER }}</td>
+                        <td class="w-20-percent">{{ CHASSIS_NUMBER }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Personal Details -->
+        <section>
+            <p class="section-title">PERSONAL DETAILS</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
+                        <th>Mobile No</th>
+                        <th>Email Id</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="yellow-cell">
+                        <td class="w-20-percent">{{ FIRST_NAME }}</td>
+                        <td class="w-20-percent">{{ MIDDLE_NAME }}</td>
+                        <td class="w-20-percent">{{ LAST_NAME }}</td>
+                        <td class="w-20-percent">{{ MOBILE_NO }}</td>
+                        <td class="w-20-percent">{{ EMAIL_ID }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>District</th>
+                        <th>State</th>
+                        <th>Pin Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="yellow-cell">
+                        <td class="w-20-percent">{{ ADDRESS }}</td>
+                        <td class="w-20-percent">{{ CITY }}</td>
+                        <td class="w-20-percent">{{ DISTRICT }}</td>
+                        <td class="w-20-percent">{{ STATE }}</td>
+                        <td class="w-20-percent">{{ PIN_CODE }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Payment Details -->
+        <section>
+            <p class="section-title">PAYMENT DETAILS</p>
+            <table>
+                <thead>
+                    <tr style="padding: 0px; border: none; border-color: transparent;">
+                        <th style="padding: 0px;"></th>
+                        <th style="padding: 0px; width: 40%;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-left">Base Plan Amount</td>
+                        <td class="yellow-cell text-right">{{ BASE_PLAN_AMOUNT }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">Amount of CGST (9%)</td>
+                        <td class="yellow-cell text-right">{{ CGST_AMOUNT }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">Amount of SGST (9%)</td>
+                        <td class="yellow-cell text-right">{{ SGST_AMOUNT }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">Amount of IGST (18%) if applicable</td>
+                        <td class="yellow-cell text-right">{{ IGST_AMOUNT }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">GST No. of the Service Recipient</td>
+                        <td class="yellow-cell text-right">{{ GST_NUMBER }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">Total Plan Amount (Including GST)</td>
+                        <td class="yellow-cell text-right">{{ TOTAL_PLAN_AMOUNT }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">Amount In Words</td>
+                        <td class="yellow-cell text-right">{{ AMOUNT_IN_WORDS }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Accident Support -->
+        <section>
+            <p class="section-title">ACCIDENTAL SUPPORT</p>
+            <div class="accident-support">
+                <p>In the event of an accident SureDrive Assist (SDA) shall provide accident support services, along
+                    with
+                    supporting features such as towing assistance medical emergency services (including ambulance
+                    arrangements),
+                    and doctor assistance.</p>
+                <p>In case riders are not feeling well, SDA shall arrange for a doctor consultation for <strong>medical
+                        attention as well</strong>. For any assistance call our toll-free number: <strong
+                        class="text-red">1800-203-7601</strong></p>
+            </div>
+            <p class="register-text">To Register Service Claim kindly scan the below QR code: OR WHATSAPP CHAT</p>
+        </section>
+
+        <!-- Service Provider Details -->
+        <section>
+            <p class="section-title">SERVICE PROVIDER'S DETAILS</p>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                    <h3><strong>SureDrive Assist Private Limited</strong></h3>
+                    <p>1607, 10th Floor, Vipul Business Park, Central Park II, Sector 48, Gurugram, Haryana 122018</p>
+                    <p><a href="mailto:support@suredriveassist.com">support@suredriveassist.com</a></p>
+                    <p>GSTNO: 06ABOCC8888A4F123 | CIN: U45209H50242PTC178595</p>
+                </div>
+                <div style="padding: 10px;">
+                    <div
+                        style="background-color: #eee; border: 2px dashed #999; border-radius: 8px; width: 56px; height: 56px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partner Section -->
+        <div class="partner-section">
+            CHANNEL PARTNER - {{ CHANNEL_PARTNER_NAME }}
+        </div>
+
+        <!-- Response Time -->
+        <div class="response-time">
+            Guaranteed Response Time - 15 mins
+        </div>
+
+        <!-- Services Table -->
+        <section>
+            <p class="section-title">THE SERVICES PROVIDED UNDER THE ASSISTANCE ARE AS FOLLOWS:</p>
+            <table style="border: none;">
+                <thead>
+                    <tr>
+                        <th class="text-left border-none">Sr. No</th>
+                        <th class="text-left border-none">SERVICES</th>
+                        <th class="text-left border-none">SURE SHIELD MAX</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td class="text-left border-none">1</td>
+                        <td class="text-left border-none">1-1 Year Offer</td>
+                        <td class="text-left border-none">Service Camp Forward</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">2</td>
+                        <td class="text-left border-none">Coverage Radius</td>
+                        <td class="text-left border-none">Across India</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">3</td>
+                        <td class="text-left border-none">Towing Assistance</td>
+                        <td class="text-left border-none">Unlimited KM</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">4</td>
+                        <td class="text-left border-none">Free Fuel Delivery</td>
+                        <td class="text-left border-none">after</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">5</td>
+                        <td class="text-left border-none">Washing / Dry Cleaning</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">6</td>
+                        <td class="text-left border-none">Discount on Labour (Service Bill)</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">7</td>
+                        <td class="text-left border-none">Discount on Labour (Spare Parts)</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">8</td>
+                        <td class="text-left border-none">Hotel Accommodation</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">9</td>
+                        <td class="text-left border-none">Taxi Assistance</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">10</td>
+                        <td class="text-left border-none">Labour & Service Charges</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">11</td>
+                        <td class="text-left border-none">Flat Type Assistance</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">12</td>
+                        <td class="text-left border-none">On-Site Minor Repairs</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">13</td>
+                        <td class="text-left border-none">Battery Jump Start</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">14</td>
+                        <td class="text-left border-none">Locked/Lost Key</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">15</td>
+                        <td class="text-left border-none">Natural Disasters or Act of GOD</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">16</td>
+                        <td class="text-left border-none">Emergency Medical Assistance</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">17</td>
+                        <td class="text-left border-none">Emergency Doctor Assistance</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">18</td>
+                        <td class="text-left border-none">Legal Assistance</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">19</td>
+                        <td class="text-left border-none">Water & Refreshments</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">20</td>
+                        <td class="text-left border-none">Mobile Charging</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">21</td>
+                        <td class="text-left border-none">Relay or Urgent Messages</td>
+                        <td class="text-left border-none">Yes</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">22</td>
+                        <td class="text-left border-none">Onward/ Forward Journey</td>
+                        <td class="text-left border-none">Assistance</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left border-none">23</td>
+                        <td class="text-left border-none">Arrangement of Rental Vehicle</td>
+                        <td class="text-left border-none">Assistance</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </section>
+
+        <div class="grid-container">
+
+            <div class="grid-item">
+                <div class="grid-item-header">Toll-Free</div>
+                <div class="content">
+                    <div class="icon">📞</div>
+                    <div class="description">Services must be requested only via the official SDA helpline. Requests
+                        through other
+                        channels won't be accepted.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Coverage Radius</div>
+                <div class="content">
+                    <div class="icon">🗺️</div>
+                    <div class="description">Service is valid across India.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Towing Assistance</div>
+                <div class="content">
+                    <div class="icon">🚗</div>
+                    <div class="description">Free service coverage up to 100 km.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Vehicle custody During Towing Delays</div>
+                <div class="content">
+                    <div class="icon">🛑</div>
+                    <div class="description">If towing is delayed, SDA will take custody of the vehicle from the
+                        breakdown
+                        location. Otherwise, the customer must ensure a smooth handover.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Discount on Labour (Service Bill)</div>
+                <div class="content">
+                    <div class="icon">💵</div>
+                    <div class="description">10% discount on labour charges at SDA-authorised service centers.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Tree Fuel Delivery</div>
+                <div class="content">
+                    <div class="icon">⛽</div>
+                    <div class="description">SURE SHIELD CORE: Free delivery of up to 1L fuel and assistance thereafter.
+                        SURE
+                        SHIELD MAX: Free delivery of up to 4L fuel and assistance thereafter. Not applicable at the
+                        customer's
+                        residence.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Discount on Labour (Spare Parts)</div>
+                <div class="content">
+                    <div class="icon">🔧</div>
+                    <div class="description">10% off on labour charges at SDA-authorised service centres. Free vehicle
+                        washing
+                        included.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Taxi Assistance</div>
+                <div class="content">
+                    <div class="icon">🚖</div>
+                    <div class="description">Free taxi service up to 50 km from the breakdown location.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Flat Tyre Assistance</div>
+                <div class="content">
+                    <div class="icon">🛞</div>
+                    <div class="description">Free puncture repair. Tyre or tube replacement will be chargeable at actual
+                        cost.
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">On-site Minor repairs</div>
+                <div class="content">
+                    <div class="icon">🔨</div>
+                    <div class="description">Labour/service is covered. Parts and consumables are chargeable as per
+                        availability.
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Battery Jump Start</div>
+                <div class="content">
+                    <div class="icon">🔋</div>
+                    <div class="description">Jump start is provided. Battery or parts will be chargeable at actuals.
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Locked/Lost Key</div>
+                <div class="content">
+                    <div class="icon">🔑</div>
+                    <div class="description">Spare key pickup can be arranged up to 50 km from the breakdown location.
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Natural Disaster or Act of GOD</div>
+                <div class="content">
+                    <div class="icon">🌪️</div>
+                    <div class="description">Support during natural disasters will be provided on a best-effort basis.
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Emergency Medical Assistance</div>
+                <div class="content">
+                    <div class="icon">🚑</div>
+                    <div class="description">Medical support will be coordinated on a best-effort basis.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Emergency Doctor Assistance</div>
+                <div class="content">
+                    <div class="icon">🏥</div>
+                    <div class="description">Doctor consultation will be provided in case of emergencies.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Legal Assistance</div>
+                <div class="content">
+                    <div class="icon">⚖️</div>
+                    <div class="description">Up to 20 minutes of legal consultation for accident-related matters.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Water & Refreshments</div>
+                <div class="content">
+                    <div class="icon">🥤</div>
+                    <div class="description">Service is provided free of charge.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Mobile Charging</div>
+                <div class="content">
+                    <div class="icon">🔌</div>
+                    <div class="description">Free charging provided using standard cables.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Onward / Forward Journey</div>
+                <div class="content">
+                    <div class="icon">✈️</div>
+                    <div class="description">Free assistance provided for flight bookings.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Arrangement of Rental Vehicle</div>
+                <div class="content">
+                    <div class="icon">🚘</div>
+                    <div class="description">Free assistance provided for arranging rental vehicles.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Hotel Accommodation</div>
+                <div class="content">
+                    <div class="icon">🏨</div>
+                    <div class="description">SDA will provide Hotel accommodation service to our customers who are 200km
+                        away from
+                        their place of residence, Usage - One time only for a single day/night.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">Relay or Urgent Messages</div>
+                <div class="content">
+                    <div class="icon">📢</div>
+                    <div class="description">In case of emergency, SDA will help deliver urgent messages to the
+                        customer's family
+                        or friends.</div>
+                </div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-item-header">1 + 1 Year Service</div>
+                <div class="content">
+                    <div class="icon">📅</div>
+                    <div class="description">If unused in the year, full plan benefits carry forward to the 2nd year.
+                        Can be
+                        availed only once.</div>
+                </div>
+            </div>
+
+            <!-- Service 24 -->
+            <div class="grid-item">
+                <div class="grid-item-header">Vehicles Eligibility – Age Limit</div>
+                <div class="content">
+                    <div class="icon">🚫</div>
+                    <div class="description">Valid for vehicles up to 7 years old. Misrepresentation may result in
+                        service
+                        cancellation.</div>
+                </div>
+            </div>
+
+            <!-- Service 25 -->
+            <div class="grid-item">
+                <div class="grid-item-header">Unlocated or Unattended Vehicle</div>
+                <div class="content">
+                    <div class="icon">🕵</div>
+                    <div class="description">Inaccurate location details or customer unavailability may lead to case
+                        closure.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 26 -->
+            <div class="grid-item">
+                <div class="grid-item-header">Off-Road Recovery</div>
+                <div class="content">
+                    <div class="icon">🏞️</div>
+                    <div class="description">Recovery service is chargeable. SDA is not liable for any damage during
+                        off-road
+                        recovery. Service is provided on a best-effort basis.</div>
+                </div>
+            </div>
+
+            <!-- Service 27 -->
+            <div class="grid-item">
+                <div class="grid-item-header">Additional Cases</div>
+                <div class="content">
+                    <div class="icon">☝</div>
+                    <div class="description">Towing or vehicle custody will be provided only after FIR clearance.</div>
+                </div>
+            </div>
+
+            <!-- Service 28 -->
+            <div class="grid-item">
+                <div class="grid-item-header">Excessive Usage & Misuse</div>
+                <div class="content">
+                    <div class="icon">👩🏻‍💻</div>
+                    <div class="description">SDA may suspend services in case of abuse or misuse. Paid assistance may be
+                        offered
+                        as an alternative.</div>
+                </div>
+            </div>
+
+            <!-- Service 29 -->
+            <div class="grid-item">
+                <div class="grid-item-header">Response Time & External Conditions</div>
+                <div class="content">
+                    <div class="icon">⏱️</div>
+                    <div class="description">SDA is not liable for delays caused by external factors beyond its control.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 30 -->
+            <div class="grid-item">
+                <div class="grid-item-header">Inter-State Movement</div>
+                <div class="content">
+                    <div class="icon">〰</div>
+                    <div class="description">Customer is responsible for carrying valid documents, paying tolls, and
+                        bearing any
+                        legal risks.</div>
+                </div>
+            </div>
+
+            <!-- Service 31 -->
+            <div class="grid-item">
+                <div class="grid-item-header">Adverse Weather Conditions</div>
+                <div class="content">
+                    <div class="icon">🌦️</div>
+                    <div class="description">Service will be provided on a best-effort basis and may be deferred in
+                        unsafe
+                        conditions.</div>
+                </div>
+            </div>
+
+            <!-- Service 32 -->
+            <div class="grid-item">
+                <div class="grid-item-header">Special Exclusions</div>
+                <div class="content">
+                    <div class="icon">™</div>
+                    <div class="description">Service will not be provided in cases of racing, vandalism, natural
+                        calamities, or
+                        similar events.</div>
+                </div>
+            </div>
+
+            <!-- Service 33 -->
+            <div class="grid-item">
+                <div class="grid-item-header">Program Activation Date</div>
+                <div class="content">
+                    <div class="icon">🚌</div>
+                    <div class="description">No wait time for new vehicles. For others, benefits begin 48 hours after
+                        plan
+                        purchase (cooling period).</div>
+                </div>
+            </div>
+
+            <!-- Service 34 -->
+            <div class="grid-item">
+                <div class="grid-item-header">Program Validity & End Date</div>
+                <div class="content">
+                    <div class="icon">⏳</div>
+                    <div class="description">Valid for 12 months; expires at 11:59:59 PM on the last day. Renewal must
+                        be done
+                        before expiry.</div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+    </div>
+</body>
+
+</html>

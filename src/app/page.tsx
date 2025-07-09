@@ -7,17 +7,29 @@ import { Button } from "@/components/ui/button";
 import CreateUserMultiStepForm from "@/sections/createUserMultiStepForm";
 import MultiStepForm from "@/sections/multi-step-form";
 import { Edit } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import PolicyDocumentView from "@/sections/PolicyDocumentView";
-
+import VendorAggrement from "@/sections/VendorAggrement";
 
 export default function Home() {
   const [editOpen, setEditOpen] = useState<boolean>(false);
-
+  const vendorRef = useRef(null);
+  console.log("🚀 ~ Home ~ vendorRef:", vendorRef);
   return (
     <div>
+      <VendorAggrement
+        ref={vendorRef}
+        vendorData={{
+          channel_partner_details: {
+            company_name: "Hero",
+            logo: "/images/hero.png",
+          },
+        }}
+      />
+
       <PolicyDocumentView />
+
       <CreateUserMultiStepForm />
 
       <div className="flex items-center justify-center p-10 bg-gray-200">

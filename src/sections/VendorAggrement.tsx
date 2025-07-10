@@ -1,13 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { useReactToPrint } from "react-to-print";
 import { Button } from "@/components/ui/button";
@@ -163,8 +155,9 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                       Haryana 122018, India, bearing Corporate Identification
                       Number (CIN) U45200HR2024PTC126936, and represented herein
                       by Mr/Ms. Name of Sales Head, Designation (hereinafter
-                      referred to as the <span className="italic">"SDA"</span>,
-                      which expression shall, unless repugnant to the context or
+                      referred to as the{" "}
+                      <span className="italic">&quot;SDA&quot;</span>, which
+                      expression shall, unless repugnant to the context or
                       meaning thereof, be deemed to include its successor,
                       affiliates, and permitted assigns);
                     </p>
@@ -178,25 +171,28 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                   <div>
                     <p className="mb-2 text-sm">
                       <span className="font-semibold">
-                        Vendor's Full Legal Name
+                        Vendor&apso;s Full Legal Name
                       </span>
                       , a type of entity, e.g.,
                       company/LLP/individual/partnership,
                       incorporated/registered under the laws of India, having
-                      its principal/registered office at Vendor's Address,
+                      its principal/registered office at Vendor&apso;s Address,
                       bearing registration number Insert Registration ID if
                       applicable, and represented herein by Name of authorized
                       signatory, Designation (hereinafter referred to as the{" "}
-                      <span className="italic">"Vendor"</span>, which expression
-                      shall, unless repugnant to the context or meaning thereof,
-                      be deemed to include its successors, affiliates, and
-                      permitted assigns)
+                      <span className="italic">&quot;Vendor&quot;</span>, which
+                      expression shall, unless repugnant to the context or
+                      meaning thereof, be deemed to include its successors,
+                      affiliates, and permitted assigns)
                     </p>
                     <p className="mt-4 text-sm">
                       <span className="font-semibold">SDA</span> and{" "}
                       <span className="font-semibold">THE VENDOR</span> shall be
                       collectively referred to as the{" "}
-                      <span className="font-semibold">"THE PARTIES"</span>:
+                      <span className="font-semibold">
+                        &quot;THE PARTIES&quot;
+                      </span>
+                      :
                     </p>
                   </div>
                 </div>
@@ -234,11 +230,11 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                       <span className="font-semibold">C.</span> The Vendor
                       agrees to render these assistance services using its own
                       resources, personnel, and equipment for the benefit of
-                      SDA's clients as referred by SDA from time to time. The
-                      Vendor further agrees to maintain round-the-clock (24x7)
-                      availability, including on weekends and public holidays,
-                      to ensure prompt and uninterrupted roadside assistance
-                      support.
+                      SDA&apso;s clients as referred by SDA from time to time.
+                      The Vendor further agrees to maintain round-the-clock
+                      (24x7) availability, including on weekends and public
+                      holidays, to ensure prompt and uninterrupted roadside
+                      assistance support.
                     </p>
                     <p>
                       <span className="font-semibold">D.</span> The Parties have
@@ -247,8 +243,8 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                         Service Provider Agreement
                       </span>
                       , whereby SDA shall engage the Vendor to perform the
-                      aforementioned services for and on behalf of SDA's clients
-                      as per the terms outlined herein.
+                      aforementioned services for and on behalf of SDA&apso;s
+                      clients as per the terms outlined herein.
                     </p>
 
                     <p className="mt-4">
@@ -409,14 +405,14 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                     </p>
                     <p className="ml-4 text-sm">
                       The Vendor shall be fully responsible for any loss or
-                      damage caused to a customer's vehicle while performing
-                      repair or towing services. In cases where negligence or
-                      mishandling by the Vendor or its staff is established, the
-                      Vendor shall bear all liability and reimburse or
-                      compensate the affected customer, including any incidental
-                      losses. Additionally, the Vendor shall reimburse SDA for
-                      any penalties or damages incurred by SDA as a result of
-                      such incidents.
+                      damage caused to a customer&apso;s vehicle while
+                      performing repair or towing services. In cases where
+                      negligence or mishandling by the Vendor or its staff is
+                      established, the Vendor shall bear all liability and
+                      reimburse or compensate the affected customer, including
+                      any incidental losses. Additionally, the Vendor shall
+                      reimburse SDA for any penalties or damages incurred by SDA
+                      as a result of such incidents.
                     </p>
                   </div>
 
@@ -555,12 +551,13 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                       </span>
                     </p>
                     <p className="ml-4 text-sm">
-                      If any damage occurs to the customer's vehicle while being
-                      towed or serviced, due to the negligence, recklessness, or
-                      mishandling by the Vendor, the Vendor shall be liable for
-                      all associated costs. Additionally, the Vendor shall bear
-                      any consequential penalties, claims, or damages levied on
-                      SDA as a direct result of such negligence.
+                      If any damage occurs to the customer&apso;s vehicle while
+                      being towed or serviced, due to the negligence,
+                      recklessness, or mishandling by the Vendor, the Vendor
+                      shall be liable for all associated costs. Additionally,
+                      the Vendor shall bear any consequential penalties, claims,
+                      or damages levied on SDA as a direct result of such
+                      negligence.
                     </p>
                   </div>
 
@@ -661,12 +658,12 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                       The Vendor shall ensure that the details provided in{" "}
                       <span className="font-bold">Annexure I</span> are accurate
                       and kept up to date at all times. In the event of any
-                      change in the Vendor's bank or tax details, the Vendor
-                      shall notify SDA in writing at least five (5) working days
-                      in advance, along with supporting documentation. SDA shall
-                      not be liable for any payment delay or failure due to
-                      incorrect or outdated bank information provided by the
-                      Vendor.
+                      change in the Vendor&apso;s bank or tax details, the
+                      Vendor shall notify SDA in writing at least five (5)
+                      working days in advance, along with supporting
+                      documentation. SDA shall not be liable for any payment
+                      delay or failure due to incorrect or outdated bank
+                      information provided by the Vendor.
                     </p>
                   </div>
 
@@ -722,7 +719,7 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                     <p className="font-semibold mb-1">
                       3.1{" "}
                       <span className="underline">
-                        Exclusion of SDA's Liability:
+                        Exclusion of SDA&apso;s Liability:
                       </span>
                     </p>
                     <p className="ml-4 text-sm">
@@ -752,7 +749,7 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                       SDA shall not be responsible for, nor shall it have any
                       legal or financial liability arising from, the acts,
                       omissions, negligence, misconduct, or failure to perform
-                      by the Vendor's personnel, agents, or sub-agents.
+                      by the Vendor&apso;s personnel, agents, or sub-agents.
                     </p>
                   </div>
 
@@ -809,8 +806,8 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                       confidential information of the other Party. Both Parties
                       agree that the terms of this Agreement and all information
                       exchanged in connection with its performance shall be
-                      treated as confidential and proprietary ("Confidential
-                      Information").
+                      treated as confidential and proprietary
+                      (&quot;Confidential Information&quot;).
                     </p>
                   </div>
 
@@ -948,9 +945,10 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                       This Agreement will begin on ______{" "}
                       <span className="font-bold">(Effective Date)</span> and
                       will remain in effect until either SDA or the Vendor
-                      decides to end it by giving 30 days' written notice to the
-                      other Party. No reason needs to be given for ending the
-                      Agreement, but the notice must be clear and in writing.
+                      decides to end it by giving 30 days&apso; written notice
+                      to the other Party. No reason needs to be given for ending
+                      the Agreement, but the notice must be clear and in
+                      writing.
                     </p>
                   </div>
 
@@ -1065,10 +1063,10 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                       </div>
                       <div>
                         <p className="font-medium">If to the Vendor:</p>
-                        <p className="text-sm">[Vendor's Full Name]</p>
-                        <p className="text-sm">[Vendor's Address]</p>
+                        <p className="text-sm">[Vendor&apso;s Full Name]</p>
+                        <p className="text-sm">[Vendor&apso;s Address]</p>
                         <p className="text-sm">
-                          Email: [Vendor's Email Address]
+                          Email: [Vendor&apso;s Email Address]
                         </p>
                       </div>
                     </div>
@@ -1140,10 +1138,10 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                       delivery are appropriately insured for commercial use and
                       covered under valid Third-Party Liability and
                       Comprehensive Insurance Policies, including but not
-                      limited to Workmen's Compensation, Public Liability, and
-                      Goods in Transit (if applicable). SDA shall not be liable
-                      for any claims arising due to the Vendor's failure to
-                      maintain valid insurance coverage.
+                      limited to Workmen&apso;s Compensation, Public Liability,
+                      and Goods in Transit (if applicable). SDA shall not be
+                      liable for any claims arising due to the Vendor&apso;s
+                      failure to maintain valid insurance coverage.
                     </p>
                   </div>
 
@@ -1192,9 +1190,9 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                     </p>
                     <p className="ml-4 text-sm">
                       Any damages, penalties, losses, or liabilities incurred by
-                      SDA due to the Vendor's non-compliance with any legal,
-                      regulatory, or insurance-related requirement shall be
-                      fully indemnified by the Vendor.
+                      SDA due to the Vendor&apso;s non-compliance with any
+                      legal, regulatory, or insurance-related requirement shall
+                      be fully indemnified by the Vendor.
                     </p>
                   </div>
 
@@ -1326,11 +1324,12 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                       or failure is caused by an event beyond its reasonable
                       control, including but not limited to acts of God, war,
                       strikes, riots, pandemics, natural disasters, or
-                      governmental restrictions ("Force Majeure Event"). The
-                      affected Party shall notify the other Party promptly and
-                      take reasonable steps to mitigate the impact. If a Force
-                      Majeure Event continues for more than 30 days, either
-                      Party may terminate this Agreement without liability.
+                      governmental restrictions (&quot;Force Majeure
+                      Event&quot;). The affected Party shall notify the other
+                      Party promptly and take reasonable steps to mitigate the
+                      impact. If a Force Majeure Event continues for more than
+                      30 days, either Party may terminate this Agreement without
+                      liability.
                     </p>
                   </div>
 
@@ -1347,8 +1346,8 @@ const VendorAggrement = forwardRef<VendorAggrementHandle, VendorAggrementProps>(
                       During the term of this Agreement and for a period of 12
                       months thereafter, the Vendor shall not directly or
                       indirectly solicit, engage, or provide similar services to
-                      any customer introduced or referred by SDA, without SDA's
-                      prior written consent.
+                      any customer introduced or referred by SDA, without
+                      SDA&apso;s prior written consent.
                     </p>
                   </div>
 

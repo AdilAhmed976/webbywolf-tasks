@@ -1,0 +1,2901 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>RSA Policy Document</title>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        text,
+        p {
+            margin: 0px;
+        }
+
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            height: 60px;
+        }
+
+        .header-brand {
+            text-align: right;
+        }
+
+        .header-brand-name {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .header-brand-tagline {
+            color: red;
+            font-size: 12px;
+        }
+
+        /* Section Styles */
+        .section-title {
+            background-color: #fe0000;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 5px;
+            border: 1px solid black;
+            margin: 0px;
+        }
+
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .yellow-cell {
+            background-color: #ffff00;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        /* Service Box Styles */
+        .service-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .service-box {
+            border: 1px solid #ddd;
+            background-color: white;
+        }
+
+        .service-box-title {
+            background-color: #fe0000;
+            color: white;
+            padding: 6px 8px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .service-box-content {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+        }
+
+        .service-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .service-description {
+            font-size: 12px;
+            text-align: left;
+        }
+
+        /* Special Sections */
+        .partner-section {
+            background-color: #ffff00;
+            padding: 5px;
+            border: 1px solid black;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .response-time {
+            text-align: center;
+            padding: 5px;
+            border: 1px solid black;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .accident-support {
+            border: 1px solid black;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .register-text {
+            text-align: right;
+            font-weight: bold;
+            color: red;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .grid-item {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .grid-item-header {
+            background-color: #fe0000;
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+            font-size: 12px;
+        }
+
+        .header {
+            background-color: #fe0000;
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .content {
+            display: flex;
+            padding: 15px;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .description {
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .w-20-percent {
+            width: 20%;
+        }
+
+        .border-none {
+            border: none;
+        }
+
+        @media print {
+
+            html,
+            body {
+                -webkit-print-color-adjust: exact;
+            }
+
+            section {
+                page-break-inside: avoid;
+            }
+
+        }
+
+        /* ===== Padding ===== */
+        .p-0 {
+            padding: 0rem;
+        }
+
+        .p-1 {
+            padding: 0.25rem;
+        }
+
+        .p-2 {
+            padding: 0.5rem;
+        }
+
+        .p-3 {
+            padding: 0.75rem;
+        }
+
+        .p-4 {
+            padding: 1rem;
+        }
+
+        .p-5 {
+            padding: 1.25rem;
+        }
+
+        .p-6 {
+            padding: 1.5rem;
+        }
+
+        .p-7 {
+            padding: 1.75rem;
+        }
+
+        .p-8 {
+            padding: 2rem;
+        }
+
+        .pt-0 {
+            padding-top: 0rem;
+        }
+
+        .pt-1 {
+            padding-top: 0.25rem;
+        }
+
+        .pt-2 {
+            padding-top: 0.5rem;
+        }
+
+        .pt-3 {
+            padding-top: 0.75rem;
+        }
+
+        .pt-4 {
+            padding-top: 1rem;
+        }
+
+        .pt-5 {
+            padding-top: 1.25rem;
+        }
+
+        .pt-6 {
+            padding-top: 1.5rem;
+        }
+
+        .pt-7 {
+            padding-top: 1.75rem;
+        }
+
+        .pt-8 {
+            padding-top: 2rem;
+        }
+
+        .pb-0 {
+            padding-bottom: 0rem;
+        }
+
+        .pb-1 {
+            padding-bottom: 0.25rem;
+        }
+
+        .pb-2 {
+            padding-bottom: 0.5rem;
+        }
+
+        .pb-3 {
+            padding-bottom: 0.75rem;
+        }
+
+        .pb-4 {
+            padding-bottom: 1rem;
+        }
+
+        .pb-5 {
+            padding-bottom: 1.25rem;
+        }
+
+        .pb-6 {
+            padding-bottom: 1.5rem;
+        }
+
+        .pb-7 {
+            padding-bottom: 1.75rem;
+        }
+
+        .pb-8 {
+            padding-bottom: 2rem;
+        }
+
+        .pl-0 {
+            padding-left: 0rem;
+        }
+
+        .pl-1 {
+            padding-left: 0.25rem;
+        }
+
+        .pl-2 {
+            padding-left: 0.5rem;
+        }
+
+        .pl-3 {
+            padding-left: 0.75rem;
+        }
+
+        .pl-4 {
+            padding-left: 1rem;
+        }
+
+        .pl-5 {
+            padding-left: 1.25rem;
+        }
+
+        .pl-6 {
+            padding-left: 1.5rem;
+        }
+
+        .pl-7 {
+            padding-left: 1.75rem;
+        }
+
+        .pl-8 {
+            padding-left: 2rem;
+        }
+
+        .pr-0 {
+            padding-right: 0rem;
+        }
+
+        .pr-1 {
+            padding-right: 0.25rem;
+        }
+
+        .pr-2 {
+            padding-right: 0.5rem;
+        }
+
+        .pr-3 {
+            padding-right: 0.75rem;
+        }
+
+        .pr-4 {
+            padding-right: 1rem;
+        }
+
+        .pr-5 {
+            padding-right: 1.25rem;
+        }
+
+        .pr-6 {
+            padding-right: 1.5rem;
+        }
+
+        .pr-7 {
+            padding-right: 1.75rem;
+        }
+
+        .pr-8 {
+            padding-right: 2rem;
+        }
+
+        .px-0 {
+            padding-left: 0rem;
+            padding-right: 0rem;
+        }
+
+        .px-1 {
+            padding-left: 0.25rem;
+            padding-right: 0.25rem;
+        }
+
+        .px-2 {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .px-3 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .px-5 {
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+        }
+
+        .px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .px-7 {
+            padding-left: 1.75rem;
+            padding-right: 1.75rem;
+        }
+
+        .px-8 {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .py-0 {
+            padding-top: 0rem;
+            padding-bottom: 0rem;
+        }
+
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .py-3 {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .py-4 {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .py-5 {
+            padding-top: 1.25rem;
+            padding-bottom: 1.25rem;
+        }
+
+        .py-6 {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .py-7 {
+            padding-top: 1.75rem;
+            padding-bottom: 1.75rem;
+        }
+
+        .py-8 {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        /* ===== Margin ===== */
+        .m-0 {
+            margin: 0rem;
+        }
+
+        .m-1 {
+            margin: 0.25rem;
+        }
+
+        .m-2 {
+            margin: 0.5rem;
+        }
+
+        .m-3 {
+            margin: 0.75rem;
+        }
+
+        .m-4 {
+            margin: 1rem;
+        }
+
+        .m-5 {
+            margin: 1.25rem;
+        }
+
+        .m-6 {
+            margin: 1.5rem;
+        }
+
+        .m-7 {
+            margin: 1.75rem;
+        }
+
+        .m-8 {
+            margin: 2rem;
+        }
+
+        .mt-0 {
+            margin-top: 0rem;
+        }
+
+        .mt-1 {
+            margin-top: 0.25rem;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+
+        .mt-3 {
+            margin-top: 0.75rem;
+        }
+
+        .mt-4 {
+            margin-top: 1rem;
+        }
+
+        .mt-5 {
+            margin-top: 1.25rem;
+        }
+
+        .mt-6 {
+            margin-top: 1.5rem;
+        }
+
+        .mt-7 {
+            margin-top: 1.75rem;
+        }
+
+        .mt-8 {
+            margin-top: 2rem;
+        }
+
+        .mb-0 {
+            margin-bottom: 0rem;
+        }
+
+        .mb-1 {
+            margin-bottom: 0.25rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 0.75rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-5 {
+            margin-bottom: 1.25rem;
+        }
+
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+
+        .mb-7 {
+            margin-bottom: 1.75rem;
+        }
+
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+
+        .ml-0 {
+            margin-left: 0rem;
+        }
+
+        .ml-1 {
+            margin-left: 0.25rem;
+        }
+
+        .ml-2 {
+            margin-left: 0.5rem;
+        }
+
+        .ml-3 {
+            margin-left: 0.75rem;
+        }
+
+        .ml-4 {
+            margin-left: 1rem;
+        }
+
+        .ml-5 {
+            margin-left: 1.25rem;
+        }
+
+        .ml-6 {
+            margin-left: 1.5rem;
+        }
+
+        .ml-7 {
+            margin-left: 1.75rem;
+        }
+
+        .ml-8 {
+            margin-left: 2rem;
+        }
+
+        .mr-0 {
+            margin-right: 0rem;
+        }
+
+        .mr-1 {
+            margin-right: 0.25rem;
+        }
+
+        .mr-2 {
+            margin-right: 0.5rem;
+        }
+
+        .mr-3 {
+            margin-right: 0.75rem;
+        }
+
+        .mr-4 {
+            margin-right: 1rem;
+        }
+
+        .mr-5 {
+            margin-right: 1.25rem;
+        }
+
+        .mr-6 {
+            margin-right: 1.5rem;
+        }
+
+        .mr-7 {
+            margin-right: 1.75rem;
+        }
+
+        .mr-8 {
+            margin-right: 2rem;
+        }
+
+        .mx-0 {
+            margin-left: 0rem;
+            margin-right: 0rem;
+        }
+
+        .mx-1 {
+            margin-left: 0.25rem;
+            margin-right: 0.25rem;
+        }
+
+        .mx-2 {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .mx-3 {
+            margin-left: 0.75rem;
+            margin-right: 0.75rem;
+        }
+
+        .mx-4 {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+
+        .mx-5 {
+            margin-left: 1.25rem;
+            margin-right: 1.25rem;
+        }
+
+        .mx-6 {
+            margin-left: 1.5rem;
+            margin-right: 1.5rem;
+        }
+
+        .mx-7 {
+            margin-left: 1.75rem;
+            margin-right: 1.75rem;
+        }
+
+        .mx-8 {
+            margin-left: 2rem;
+            margin-right: 2rem;
+        }
+
+        .my-0 {
+            margin-top: 0rem;
+            margin-bottom: 0rem;
+        }
+
+        .my-1 {
+            margin-top: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .my-2 {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .my-3 {
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .my-4 {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .my-5 {
+            margin-top: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .my-6 {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .my-7 {
+            margin-top: 1.75rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .my-8 {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+
+        /* ===== Flex Utilities ===== */
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .flex-row {
+            flex-direction: row;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        /* ===== Border ===== */
+        .border {
+            border: 1px solid #000;
+        }
+
+        .border-black {
+            border-color: black;
+        }
+
+        .border-red {
+            border-color: red;
+        }
+
+        .rounded {
+            border-radius: 0.25rem;
+        }
+
+        .rounded-md {
+            border-radius: 0.375rem;
+        }
+
+        /* ===== Text Alignment ===== */
+        .text-left {
+            text-align: left;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        /* ===== Font Size ===== */
+        .text-xs {
+            font-size: 0.75rem;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+        }
+
+        .text-base {
+            font-size: 1rem;
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+        }
+
+        .text-xl {
+            font-size: 1.25rem;
+        }
+
+        .text-2xl {
+            font-size: 1.5rem;
+        }
+
+        .text-3xl {
+            font-size: 1.875rem;
+        }
+
+        .text-4xl {
+            font-size: 2.25rem;
+        }
+
+        /* ===== Font Weight ===== */
+        .font-normal {
+            font-weight: 400;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        /* ===== Height & Width ===== */
+        .h-auto {
+            height: auto;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .w-1\/2 {
+            width: 50%;
+        }
+
+        .w-20pct {
+            width: 20%;
+        }
+
+        /* Custom: for sm:w-[20%] equivalent */
+
+        /* ===== Whitespace Handling ===== */
+        .whitespace-nowrap {
+            white-space: nowrap;
+        }
+
+        .whitespace-normal {
+            white-space: normal;
+        }
+
+        .font-thin {
+            font-weight: 100;
+        }
+
+        .font-extralight {
+            font-weight: 200;
+        }
+
+        .font-light {
+            font-weight: 300;
+        }
+
+        .font-normal {
+            font-weight: 400;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .font-extrabold {
+            font-weight: 800;
+        }
+
+        .font-black {
+
+            font-weight: 900;
+        }
+
+        /*  */
+
+        .underline {
+            text-decoration: underline;
+        }
+
+        /* ===== Display Grid ===== */
+        .grid {
+            display: grid;
+        }
+
+        /* ===== Grid Columns ===== */
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .grid-cols-4 {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .grid-cols-5 {
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+
+        .grid-cols-6 {
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+        }
+
+        /* ===== Gap ===== */
+        .gap-0 {
+            gap: 0rem;
+        }
+
+        .gap-1 {
+            gap: 0.25rem;
+        }
+
+        .gap-2 {
+            gap: 0.5rem;
+        }
+
+        .gap-3 {
+            gap: 0.75rem;
+        }
+
+        .gap-4 {
+            gap: 1rem;
+        }
+
+        .gap-5 {
+            gap: 1.25rem;
+        }
+
+        .gap-6 {
+            gap: 1.5rem;
+        }
+
+        .gap-8 {
+            gap: 2rem;
+        }
+
+        /* ===== Gap X (horizontal gap between columns) ===== */
+        .gap-x-1 {
+            column-gap: 0.25rem;
+        }
+
+        .gap-x-2 {
+            column-gap: 0.5rem;
+        }
+
+        .gap-x-4 {
+            column-gap: 1rem;
+        }
+
+        .gap-x-8 {
+            column-gap: 2rem;
+        }
+
+        /* ===== Gap Y (vertical gap between rows) ===== */
+        .gap-y-1 {
+            row-gap: 0.25rem;
+        }
+
+        .gap-y-2 {
+            row-gap: 0.5rem;
+        }
+
+        .gap-y-4 {
+            row-gap: 1rem;
+        }
+
+        .gap-y-8 {
+            row-gap: 2rem;
+        }
+
+        .leading-none {
+            line-height: 1;
+        }
+
+        .leading-tight {
+            line-height: 1.25;
+        }
+
+        .leading-snug {
+            line-height: 1.375;
+        }
+
+        .leading-normal {
+            line-height: 1.5;
+        }
+
+        .leading-relaxed {
+            line-height: 1.625;
+        }
+
+        .leading-loose {
+            line-height: 2;
+        }
+
+        .leading-3 {
+            line-height: 0.75rem;
+        }
+
+        /* 12px */
+        .leading-4 {
+            line-height: 1rem;
+        }
+
+        /* 16px */
+        .leading-5 {
+            line-height: 1.25rem;
+        }
+
+        /* 20px */
+        .leading-6 {
+            line-height: 1.5rem;
+        }
+
+        /* 24px */
+        .leading-7 {
+            line-height: 1.75rem;
+        }
+
+        /* 28px */
+        .leading-8 {
+            line-height: 2rem;
+        }
+
+        /* 32px */
+        .leading-9 {
+            line-height: 2.25rem;
+        }
+
+        /* 36px */
+        .leading-10 {
+            line-height: 2.5rem;
+        }
+
+        /* 40px */
+
+        .space-x-0>*+* {
+            margin-left: 0px;
+        }
+
+        .space-x-1>*+* {
+            margin-left: 0.25rem;
+        }
+
+        /* 4px */
+        .space-x-2>*+* {
+            margin-left: 0.5rem;
+        }
+
+        /* 8px */
+        .space-x-3>*+* {
+            margin-left: 0.75rem;
+        }
+
+        /* 12px */
+        .space-x-4>*+* {
+            margin-left: 1rem;
+        }
+
+        /* 16px */
+        .space-x-5>*+* {
+            margin-left: 1.25rem;
+        }
+
+        /* 20px */
+        .space-x-6>*+* {
+            margin-left: 1.5rem;
+        }
+
+        /* 24px */
+        .space-x-8>*+* {
+            margin-left: 2rem;
+        }
+
+        /* 32px */
+        .space-x-10>*+* {
+            margin-left: 2.5rem;
+        }
+
+        /* 40px */
+        .space-x-12>*+* {
+            margin-left: 3rem;
+        }
+
+        /* 48px */
+        .space-x-16>*+* {
+            margin-left: 4rem;
+        }
+
+        /* 64px */
+        .space-x-20>*+* {
+            margin-left: 5rem;
+        }
+
+        /* 80px */
+        .space-x-24>*+* {
+            margin-left: 6rem;
+        }
+
+        /* 96px */
+        .space-x-32>*+* {
+            margin-left: 8rem;
+        }
+
+        /* 128px */
+        .space-x-40>*+* {
+            margin-left: 10rem;
+        }
+
+        /* 160px */
+        .space-x-48>*+* {
+            margin-left: 12rem;
+        }
+
+        /* 192px */
+        .space-x-56>*+* {
+            margin-left: 14rem;
+        }
+
+        /* 224px */
+        .space-x-64>*+* {
+            margin-left: 16rem;
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            font-size: 14px;
+        }
+
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .signature-box {
+            width: 48%;
+            font-size: 14px;
+        }
+
+        /* 256px */
+    </style>
+</head>
+
+<body>
+    <div class="container border text-justify">
+
+        <div class=" mb-2">
+            <h1 class="m-0 text-center text-sm">
+                SERVICE PROVIDER AGREEMENT
+            </h1>
+            <p class="text-xs mt-4">
+                This
+                <span class="font-bold">
+
+                    Service Provider Agreement
+                </span>
+                is made on the ________day of______,______
+                <span class="font-bold">(Effective Date)</span>
+                in Gurugram, Haryana.
+            </p>
+        </div>
+
+        <h1 class="text-sm font-semibold text-center my-2">
+            BETWEEN
+        </h1>
+
+        <!-- {/* SDA Info */} -->
+        <div class="mb-4">
+            <p class="mb-1 text-xs">
+                <span class="font-semibold">
+                    M/s SureDrive Assist Private Limited
+                </span>
+                , a company incorporated under the Companies Act, 2013, having its
+                registered office at Unit No. 1007, 10th Floor, Vipul Business Park, Sohna Road, Sector 48, Gurugram,
+                Haryana 122018, India, bearing Corporate Identification Number (CIN)
+                <span class="font-bold">
+                    U45200HR2024PTC126936
+                </span>
+                , and represented herein by
+                <span class="font-bold">
+                    Mr/Ms. Name of Sales Head, Designation
+                </span>
+                (hereinafter referred to as the
+                <span class="font-bold">
+                    "SDA"
+                </span>
+                , which
+                expression shall, unless repugnant to the context or meaning thereof, be deemed to include its
+                successors,
+                affiliates, and permitted assigns);
+
+            </p>
+        </div>
+
+        <div class="text-center font-semibold my-2">
+            <h3 class="text-sm">AND</h3>
+        </div>
+
+        <!-- {/* Vendor Info */} -->
+        <div>
+            <p class="mb-2 text-xs leading-4">
+                ______________________, a __________________________________, incorporated/registered under the
+                laws of India, having its principal/registered office at________________________, bearing registration
+                number
+                (________________________), and represented herein by _____________________(hereinafter referred to as
+                the
+                "Vendor", which expression shall, unless repugnant to the context or meaning thereof, be deemed to
+                include
+                its successors, affiliates, and permitted assigns)
+            </p>
+            <p class="mt-4 text-xs">
+                SDA and THE VENDOR shall be collectively referred to as the
+                <span class="font-bold">
+
+                    ‘THE PARTIES’.
+                </span>
+            </p>
+        </div>
+
+        <!-- {/* WHEREAS Section */} -->
+        <div>
+            <h2 class="text-sm font-semibold my-2 text-center">WHEREAS</h2>
+
+            <div class="space-y-4 text-xs pl-4">
+                <p class="mb-4">
+                    A.
+                    <span class="font-semibold">
+                        SureDrive Assist Private Limited (SDA) is a tech-enabled automotive service provider operating
+                        in
+                    </span>
+                    both B2B and B2B2C segments. While Roadside Assistance (RSA) forms the backbone of our offerings,
+                    we also deliver a comprehensive suite of mobility support solutions including Warranty Management,
+                    Electric Vehicle (EV) Support Services, Accident Management and Insurance Facilitation. SDA
+                    collaborates with OEMs, dealerships, workshops, fleet operators, and insurance partners to offer
+                    seamless, scalable, and value-driven vehicle support across the customer lifecycle.
+
+                </p>
+
+                <p class="mb-4">
+                    <span class="font-semibold">The Vendor</span>
+                    The Vendor is a service provider offering on-the-spot repair, towing/crane services, Under lift
+                    vehicles, custody services (as per ANNEXURE II), and possesses the necessary infrastructure,
+                    equipment, and expertise to deliver such services in accordance with applicable industry standards.
+                </p>
+
+                <p class="mb-4">
+
+                    C. The Vendor agrees to render these assistance services using its own resources, personnel, and
+                    equipment for the benefit of SDA’s clients as referred by SDA from time to time. The Vendor further
+                    agrees to maintain
+                    <span class="font-semibold">
+
+                        round-the-clock (24x7) availability
+                    </span>
+                    , including on weekends and public holidays, to
+                    ensure prompt and uninterrupted roadside assistance support
+                </p>
+                <p class="mb-4">
+                    D. The Parties have agreed to formalize this working relationship under this
+                    <span class="font-semibold">
+                        Service Provider
+                        Agreement
+                    </span>
+                    , whereby SDA shall engage the Vendor to perform the aforementioned services for and
+                    on behalf of SDA’s clients as per the terms outlined herein.
+                </p>
+
+                <p class="mt-4">
+                    E. In consideration
+                    of the services rendered, SDA agrees to pay the Vendor a
+                    <span class="font-bold">
+                        fixed fee and/or service-based charges
+                    </span>
+                    , as set out in
+                    <span class="font-bold">Annexure II</span> to this
+                    Agreement, subject to proper performance and timely
+                    submission of documentation by the Vendor.
+                </p>
+
+                <p class="mt-4">
+                    F. The Parties
+                    acknowledge and agree that this Agreement is
+                    <span class="font-bold">complementary</span> to any
+                    other
+
+                    service-level arrangements
+
+                    or communications previously entered into between the
+                    Parties. Accordingly, the
+                    <span class="font-bold">
+                        termination of this Agreement
+                        shall also result in the simultaneous termination of all
+                        related service arrangements,
+                    </span>
+                    including any prior or
+                    parallel Service Provider Agreements, and vice versa.
+                </p>
+            </div>
+        </div>
+
+
+        <!-- {/* Agreement Section */} -->
+        <div>
+            <div class="my-6">
+                <h3 class="text-sm font-bold text-center mb-4">
+                    NOW IT IS HEREBY AGREED BY AND BETWEEN THE PARTIES HERETO AS FOLLOWS;
+                </h3>
+            </div>
+
+            <h3 class="text-sm font-bold mb-3">
+                1.
+                <span class="underline">
+                    DUTIES AND RESPONSIBILITIES OF THE VENDOR
+                </span>
+            </h3>
+
+            <!-- {/* Sub-clause 1.1 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    1.1
+                    <span class="underline">Provision of Services:</span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor agrees to provide all services listed in
+                    <span class="font-bold">Annexure II</span> to the
+                    clients of SDA and its direct customers, ensuring the
+                    services are performed diligently, professionally, and in
+                    accordance with the standards expected by SDA.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 1.2 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    1.2
+                    <span class="underline">
+                        Restriction on Subcontracting:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall not subcontract, assign, or delegate any
+                    of the obligations or services under this Agreement to any
+                    third party or external entity without the prior written
+                    approval of SDA. Any such unauthorized subcontracting
+                    shall be treated as a material breach of this Agreement.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 1.3 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    1.3
+                    <span class="underline">
+                        Communication of Delays:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall promptly inform SDA of any expected or
+                    actual delays in service delivery. Such communication must
+                    include the specific reason for the delay and shall be
+                    made in real time or at the earliest possible moment. The
+                    Vendor shall take all reasonable steps to notify SDA
+                    without undue delay, enabling SDA to communicate
+                    appropriately with the affected customer.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 1.4 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    1.4
+                    <span class="underline">Job Sheet Completion:</span>
+                </p>
+                <p class="ml-4 text-xs">
+                    For each service rendered, the Vendor shall accurately
+                    complete a service/job sheet including all relevant
+                    information such as time of arrival, nature of service,
+                    customer details, distance covered, and any issues
+                    encountered. The completed job sheet must be submitted
+                    along with the invoice for payment processing.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 1.5 */} -->
+            <div class="ml-4">
+                <p class="font-semibold mb-1 text-sm">
+                    1.5
+                    <span class="underline">
+                        Licensing and Regulatory Compliance:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall obtain and maintain all required permits,
+                    licenses, registrations, certifications, and statutory
+                    authorizations necessary to lawfully operate and perform
+                    services under this Agreement within the
+                    designatedjurisdiction. The Vendor shall also ensure that
+                    all employees or personnel deployed have undergone
+                    necessary background checks and government verifications.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 1.6 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    1.6 <span class="underline">Insurance Coverage:</span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall maintain valid and adequate trade
+                    insurance and liability coverage at all times during the
+                    term of this Agreement. The insurance must cover
+                    third-party liabilities, damage to customer vehicles, and
+                    any operational risks arising from service delivery.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 1.7 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    1.7
+                    <span class="underline">
+                        Responsibility for Damages:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall be fully responsible for any loss or
+                    damage caused to a customer's vehicle while performing
+                    repair or towing services. In cases where negligence or
+                    mishandling by the Vendor or its staff is established, the
+                    Vendor shall bear all liability and reimburse or
+                    compensate the affected customer, including any incidental
+                    losses. Additionally, the Vendor shall reimburse SDA for
+                    any penalties or damages incurred by SDA as a result of
+                    such incidents.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 1.8 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    1.8
+                    <span class="underline">
+                        Prohibition on Direct Payments:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor or its representatives shall not solicit or
+                    accept any payment, in cash or otherwise, directly from
+                    the customer under any circumstances. Any such conduct
+                    shall constitute a breach of contract and may result in
+                    immediate termination of the Agreement.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 1.9 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    1.9
+                    <span class="underline">
+                        Availability and Equipment Condition:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall ensure 24x7 availability of service. All
+                    vehicles, tools, and equipment used for delivering
+                    services must be in good working condition, clean, safe,
+                    and compliant with applicable laws and road safety
+                    regulations. The cost of maintenance and compliance shall
+                    be borne solely by the Vendor.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 1.10 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    1.10
+                    <span class="underline">
+                        Deployment of Skilled Personnel:
+                    </span>
+                </p>
+                <p class="ml-4 mb-2">
+                    The Vendor shall deploy qualified and trained personnel
+                    for all services. This includes:
+                </p>
+                <ul class="ml-4 list-disc">
+                    <li class="text-xs">
+                        Skilled Technicians for Repair on Spot (ROS) services,
+                    </li>
+                    <li class="text-xs">
+                        Drivers with valid and appropriate driving licenses for
+                        towing operations, and
+                    </li>
+                    <li class="text-xs">
+                        Skilled Helpers capable of operating and assisting with
+                        towing vehicles.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- {/* Sub-clause 1.11 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    1.11
+                    <span class="underline">
+                        Priority and Timeliness:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall provide services on a priority basis and
+                    shall ensure minimum response time. All calls assigned by
+                    SDA must be acknowledged promptly and acted upon within
+                    the service timelines specified in Annexure II.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 1.12 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    1.12
+                    <span class="underline">
+                        Service Level Compliance:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall meet and maintain service performance as
+                    per the standards and timelines mentioned in Annexure II.
+                    Repeated failure to meet the agreed service levels may
+                    result in review, penalty, or termination of the
+                    Agreement.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 1.13 */} -->
+            <div class="ml-4">
+                <p class="font-semibold mb-1 text-sm">
+                    1.13
+                    <span class="underline">Invoicing Procedure:</span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall raise invoices for only those services
+                    successfully completed and verified by SDA. The invoicing
+                    shall strictly follow the format and rates specified in
+                    Annexure II, along with all necessary supporting
+                    documents.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 1.14 */} -->
+            <div class="ml-4 mb-4 ">
+                <p class="font-semibold mb-1 text-sm">
+                    1.14
+                    <span class="underline">Substance Abuse Policy:</span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall ensure that none of its staff involved in
+                    service delivery is under the influence of alcohol,
+                    narcotics, drugs, or any other substance that may impair
+                    their judgment, safety, or performance during service
+                    delivery. Any violation shall be considered gross
+                    misconduct.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 1.15 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    1.15
+                    <span class="underline">
+                        Liability for Negligence:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    If any damage occurs to the customer's vehicle while being
+                    towed or serviced, due to the negligence, recklessness, or
+                    mishandling by the Vendor, the Vendor shall be liable for
+                    all associated costs. Additionally, the Vendor shall bear
+                    any consequential penalties, claims, or damages levied on
+                    SDA as a direct result of such negligence.
+                </p>
+            </div>
+
+            <!-- {/* Clause 2 */} -->
+            <h3 class="text-md font-bold mb-3">
+                2.
+                <span class="underline">
+                    DUTIES AND RESPONSIBILITIES OF SDA
+                </span>
+            </h3>
+
+            <!-- {/* Sub-clause 2.1 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    2.1 <span class="underline">Payment Obligation:</span>
+                </p>
+                <p class="ml-4 text-xs">
+                    SDA shall make payments to the Vendor for services that
+                    are duly completed and verified, subject to the submission
+                    of a correct, complete, and signed invoice by the Vendor.
+                    The payment shall be made in accordance with the rates and
+                    terms specified in Annexure II of this agreement.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 2.2 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    2.2
+                    <span class="underline">
+                        Invoice Submission by Vendor:
+                    </span>
+                </p>
+                <p class="ml-4 mb-2">
+                    The Vendor shall raise a monthly consolidated invoice for
+                    all assistance services rendered during the preceding
+                    month. Each invoice must adhere to the format prescribed
+                    by SDA and shall include all necessary supporting
+                    documents such as:
+                </p>
+                <ul class="ml-4 list-disc">
+                    <li class="text-xs">Signed and completed job sheets,</li>
+                    <li class="text-xs">Service logs or reports,</li>
+                    <li class="text-xs">Customer and vehicle details,</li>
+                    <li class="text-xs">Distance covered (where applicable), and</li>
+                    <li class="text-xs">
+                        Any additional documentation requested by SDA from time
+                        to time.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- {/* Sub-clause 2.3 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    2.3
+                    <span class="underline">
+                        Invoice Submission Address:
+                    </span>
+                </p>
+                <p class="ml-4 mb-2 text-xs">
+                    All invoices along with the required documentation must be
+                    sent to the following address:
+                </p>
+                <div class="ml-8 bg-gray-50 p-3 rounded">
+                    <p class="mb-1 font-medium text-xs">Finance Team</p>
+                    <p class="mb-1 font-bold text-xs">SureDrive Assist Private Limited</p>
+                    <p class="mb-1 text-xs">Unit No. 1007, 10th Floor, Vipul Business Park,</p>
+                    <p class="mb-1 text-xs">
+                        Sohna Road, Sector-48, Gurugram, Haryana – 122018, India
+                    </p>
+                    <p class="text-xs mb-1">GSTN : 06ABOCS8688N1Z3</p>
+                    <p class="text-xs mb-1">Email id: Eindos@suredriveassist.com</p>
+                </div>
+            </div>
+
+            <!-- {/* Sub-clause 2.4 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    2.4
+                    <span class="underline">
+                        Payment Timeline and Mode:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    Upon receipt of a complete, accurate, and verified invoice
+                    package—either in physical or electronic form—SDA shall
+                    process and release payment to the Vendor within thirty
+                    (30) working days, provided that no discrepancies or
+                    disputes are found in the documentation submitted.
+                </p>
+                <p class="ml-4 mt-2 text-xs">
+                    The payment shall be made via NET/RTGS/IMPS or any other
+                    mutually agreed electronic mode to the bank account
+                    provided by the Vendor under Annexure I of this Agreement.
+                </p>
+                <p class="ml-4 mt-2 text-xs">
+                    The Vendor shall ensure that the details provided in
+                    <span class="font-bold">Annexure I</span> are accurate
+                    and kept up to date at all times. In the event of any
+                    change in the Vendor's bank or tax details, the Vendor
+                    shall notify SDA in writing at least five (5) working days
+                    in advance, along with supporting documentation. SDA shall
+                    not be liable for any payment delay or failure due to
+                    incorrect or outdated bank information provided by the
+                    Vendor.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 2.5 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    2.5
+                    <span class="underline">
+                        Restrictions on invoicing:
+                    </span>
+                </p>
+                <p class="ml-6 mb-1 text-xs">
+                    I. The Vendor shall not raise an invoice for any service
+                    for which it has received payment directly from the end
+                    customer. Such cases must be excluded from the monthly
+                    invoice submitted to SDA.
+                </p>
+                <p class="ml-6 text-xs">
+                    II. Mileage or distance-based service billing shall be
+                    calculated using commonly accepted digital mapping
+                    applications (e.g., Google Maps etc.). The distance
+                    calculation determined by SDA using such software shall be
+                    final and binding on both Parties.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 2.6 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    2.6
+                    <span class="underline">
+                        Dispute Resolution on Billing:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    In case of any billing discrepancies or queries raised by
+                    SDA, the Vendor shall provide clarifications or revised
+                    documentation within a reasonable timeframe. SDA reserves
+                    the right to withhold disputed portions of any invoice
+                    pending resolution, while processing undisputed amounts as
+                    per the payment terms.
+                </p>
+            </div>
+
+            <!-- {/* Clause 3 */} -->
+            <h3 class="text-md font-bold mb-3">
+                3.
+                <span class="underline">LIMITATIONS ON LIABILITY</span>
+            </h3>
+
+            <!-- {/* Sub-clause 3.1 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    3.1
+                    <span class="underline">
+                        Exclusion of SDA's Liability:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    SDA shall not be liable or held responsible for any injury
+                    (including personal injury), loss, damage, or harm caused
+                    to any person, property, or vehicle arising out of, or in
+                    connection with, the services provided by the Vendor, its
+                    employees, agents, contractors, or representatives. The
+                    Vendor acknowledges that all services are performed
+                    independently, and at the sole risk and responsibility of
+                    the Vendor.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 3.2 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    3.2
+                    <span class="underline">
+                        Responsibility for Personnel:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall ensure that all individuals engaged in
+                    providing services under this Agreement are either its
+                    direct employees or legally authorized representatives.
+                    SDA shall not be responsible for, nor shall it have any
+                    legal or financial liability arising from, the acts,
+                    omissions, negligence, misconduct, or failure to perform
+                    by the Vendor's personnel, agents, or sub-agents.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 3.3 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    3.3 <span class="underline">Indemnification:</span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall fully indemnify, defend, and hold
+                    harmless SDA, its directors, officers, employees, and
+                    representatives from and against any and all claims,
+                    liabilities, losses, damages, penalties, costs, or
+                    expenses (including reasonable legal fees) arising out of:
+                </p>
+                <ul class="ml-4 list-disc mt-2">
+                    <li class="text-xs">
+                        Any breach by the Vendor of its obligations under this
+                        Agreement;
+                    </li>
+                    <li class="text-xs">
+                        Any negligent act, omission, misconduct, or willful
+                        default by the Vendor or its personnel;
+                    </li>
+                    <li class="text-xs">
+                        Any claim by third parties (including customers) arising
+                        from damage to property or injury caused during service
+                        execution;
+                    </li>
+                    <li class="text-xs">
+                        Any non-compliance with applicable laws, regulations, or
+                        contractual obligations by the Vendor.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- {/* Clause 4 */} -->
+            <h3 class="text-md font-bold mb-3">
+                4. <span class="underline">CONFIDENTIALITY</span>
+            </h3>
+
+            <!-- {/* Sub-clause 4.1 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    4.1
+                    <span class="underline">
+                        Confidential Nature of Information:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    Each Party acknowledges that, in the course of performing
+                    its obligations under this Agreement, it may receive or
+                    have access to certain non-public, proprietary, or
+                    confidential information of the other Party. Both Parties
+                    agree that the terms of this Agreement and all information
+                    exchanged in connection with its performance shall be
+                    treated as confidential and proprietary ("Confidential
+                    Information").
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 4.2 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    4.2
+                    <span class="underline">
+                        Scope of Confidential Information:
+                    </span>
+                </p>
+                <p class="ml-4 mb-2 text-xs">
+                    Confidential Information shall include, but is not limited
+                    to:
+                </p>
+                <ul class="ml-4 list-disc">
+                    <li class="text-xs">Customer-related data and personal information;</li>
+                    <li class="text-xs">Vehicle information and service history;</li>
+                    <li class="text-xs">
+                        Business models, pricing structures, financial records,
+                        and operational procedures;
+                    </li>
+                    <li class="text-xs">
+                        Details of existing or potential commercial contracts or
+                        partnerships;
+                    </li>
+                    <li class="text-xs">
+                        Any other data disclosed in written, oral, visual, or
+                        electronic form that is designated as confidential or
+                        that should reasonably be understood as confidential
+                        under the circumstances.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- {/* Sub-clause 4.3 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    4.3
+                    <span class="underline">
+                        Obligation to Maintain Confidentiality:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    Each Party shall use the Confidential Information solely
+                    for the purposes of fulfilling its obligations under this
+                    Agreement and shall restrict disclosure to only those
+                    employees, officers, or authorized agents who have a
+                    legitimate need to know such information and are bound by
+                    obligations of confidentiality no less stringent than
+                    those set forth herein.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 4.4 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    4.4
+                    <span class="underline">Remedies for Breach:</span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Parties acknowledge that unauthorized use, disclosure,
+                    or misappropriation of Confidential Information may cause
+                    immediate and irreparable harm to the disclosing Party,
+                    for which monetary damages may not be an adequate remedy.
+                    In such cases, the disclosing Party shall be entitled to
+                    seek injunctive relief and other equitable remedies, in
+                    addition to any legal remedies available under applicable
+                    law.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 4.5 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    4.5
+                    <span class="underline">
+                        Notification and Mitigation:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    In the event a Party becomes aware of any unauthorized
+                    access to, disclosure of, or misuse of Confidential
+                    Information, such Party shall promptly notify the other in
+                    writing and take all necessary steps, at its own expense,
+                    to contain and mitigate the consequences of such breach.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 4.6 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    4.6
+                    <span class="underline">
+                        Exclusions from Confidentiality Obligations:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The obligations under this Clause shall not apply to
+                    information that:
+                </p>
+                <ol class="ml-8 list-decimal mt-2">
+                    <li class="text-xs">
+                        Was already known to the receiving Party prior to
+                        disclosure, as evidenced by written records;
+                    </li>
+                    <li class="text-xs">
+                        Is or becomes publicly available through no fault or
+                        breach of the receiving Party;
+                    </li>
+                    <li class="text-xs">
+                        Is rightfully received from a third party without
+                        restriction and without breach of any confidentiality
+                        obligation; or
+                    </li>
+                    <li class="text-xs">
+                        Is required to be disclosed by law, court order, or
+                        governmental authority, provided that the receiving
+                        Party gives prompt written notice to the disclosing
+                        Party (unless prohibited by law) to allow it to seek a
+                        protective order or other appropriate remedy.
+                    </li>
+                </ol>
+            </div>
+
+            <!-- {/* Clause 5 */} -->
+            <h3 class="text-md font-bold mb-3">
+                5. <span class="underline">TENURE AND TERMINATION</span>
+            </h3>
+
+            <!-- {/* Sub-clause 5.1 */} -->
+            <div class="ml-4 mb-4">
+                <p class="ml-4 text-xs">
+                    <span class="font-semibold mb-1 text-xs">5.1</span>
+                    This Agreement will begin on _________
+                    <span class="font-bold">(Effective Date)</span> and
+                    will remain in effect until either SDA or the Vendor
+                    decides to end it by giving 30 days' written notice to the
+                    other Party. No reason needs to be given for ending the
+                    Agreement, but the notice must be clear and in writing.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 5.2 */} -->
+            <div class="ml-4 mb-4">
+                <p class="ml-4 text-xs">
+                    <span class="font-semibold mb-1 text-xs">5.2</span>
+                    This Agreement will be governed by the laws of India. Both
+                    Parties agree to follow and comply with all applicable
+                    laws and regulations.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 5.3 */} -->
+            <div class="ml-4 mb-4">
+                <p class="ml-4 text-xs">
+                    <span class="font-semibold mb-1 text-xs">5.3</span>
+                    If any disagreement or dispute arises between SDA and the
+                    Vendor regarding the meaning, performance, or any part of
+                    this Agreement, both Parties will try to resolve the issue
+                    through discussion and mutual understanding.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 5.4 */} -->
+            <div class="ml-4 mb-4">
+                <p class="ml-4 text-xs">
+                    <span class="font-semibold mb-1 text-xs">5.4</span>
+                    If the matter cannot be resolved through discussion, the
+                    issue will be taken to the courts located in Gurugram,
+                    Haryana, and both Parties agree that only those courts
+                    will have the authority to settle the matter.
+                </p>
+            </div>
+
+            <!-- {/* Clause 6 */} -->
+            <h3 class="text-md font-bold mb-3">
+                6. <span class="underline">NOTICES</span>
+            </h3>
+
+            <!-- {/* Sub-clause 6.1 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">6.1</p>
+                <p class="ml-4 text-xs">
+                    Any notice, request, demand, or other communication
+                    required or permitted under this Agreement shall be in
+                    writing and shall be deemed duly given if delivered by one
+                    of the following methods:
+                </p>
+                <p class="ml-6 text-xs">
+                    (a)
+                    <span>
+                        Personal Delivery
+                    </span>
+                    – Delivered in person to the address
+                    of the receiving Party as specified below;
+                </p>
+                <p class="ml-6 text-xs">
+                    (b)
+                    <span>
+                        Registered or Certified Mail
+                    </span>
+                    – Sent via registered or
+                    certified mail, return receipt requested, to the address
+                    specified below;
+                </p>
+                <p class="ml-6 text-xs">
+                    (c)
+                    <span>
+                        Email
+                    </span>
+                    – Sent to the official email address provided by
+                    each Party, provided that the sender receives an
+                    electronic confirmation of receipt.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 6.2 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    6.2
+                    <span class="underline">
+                        Effective Date of Notice:
+                    </span>
+                    Such notices shall be effective:
+                </p>
+                <ul class="ml-4 list-disc">
+                    <li class="text-xs">
+                        On the date of delivery, if delivered personally;
+                    </li>
+                    <li class="text-xs">
+                        On the date of receipt, as evidenced by postal
+                        acknowledgement, if sent by registered/certified mail;
+                    </li>
+                    <li class="text-xs">
+                        On the date of confirmed receipt if sent by email.
+                    </li>
+                </ul>
+            </div>
+
+            <!-- {/* Sub-clause 6.3 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    6.3
+                    <span class="underline">Addresses for Notice:</span>
+                </p>
+                <div class="ml-6 grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="font-bold text-xs  mb-1">If to SDA</p>
+                        <p class="text-xs mb-1">Finance/Legal Team</p>
+                        <p class="text-xs mb-1">
+                            SureDrive Assist Private Limited:
+                        </p>
+                        <p class="text-xs mb-1">
+                            Unit No. 1007, 10th Floor, Vipul Business Park,
+                        </p>
+                        <p class="text-xs mb-1">
+                            Sohna Road, Sector 48, Gurugram, Haryana –
+                        </p>
+                        <p class="text-xs mb-1">122004, India</p>
+                        <p class="text-xs mb-1">
+                            Email:
+                            <span class="underline" style="color: blue;">
+
+                                finops@suredriveassist.com
+                            </span>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-1">If to the Vendor:</p>
+                        <p class="text-xs mb-1">_________________________</p>
+                        <p class="text-xs mb-1">_________________________</p>
+                        <p class="text-xs mb-1">
+                            Email: ____________________
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- {/* Sub-clause 6.4 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">6.4</p>
+                <p class="ml-4 text-xs">
+                    Either Party may change its address or email for notice by
+                    giving the other Party written notice of the new contact
+                    details in accordance with this Clause.
+                </p>
+            </div>
+
+            <!-- {/* Clause 7 */} -->
+            <h3 class="text-md font-bold mb-3">
+                7.
+                <span class="underline">
+                    REGULATORY PERMITS, INSURANCE, AND STATUTORY COMPLIANCE
+                </span>
+            </h3>
+
+            <!-- {/* Sub-clause 7.1 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    7.1
+                    <span class="underline">
+                        Permits and Authorizations:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor affirms that it has obtained, and shall
+                    maintain at its own cost, all necessary licenses, permits,
+                    approvals, and authorizations required for operating its
+                    services from the appropriate Road Transport Authorities
+                    (RTO) and any other applicable regulatory or statutory
+                    bodies within the designated area of operation.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 7.2 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    7.2
+                    <span class="underline">
+                        Compliance with Applicable Laws:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall be solely responsible for ensuring full
+                    compliance with all applicable central, state, and local
+                    laws, rules, and regulations governing the usage,
+                    operation, and maintenance of its service vehicles and
+                    equipment. This includes compliance with labour laws,
+                    transport regulations, motor vehicle rules, insurance
+                    laws, pollution control norms, and any other relevant
+                    statutory obligations.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 7.3 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    7.3 <span class="underline">Insurance Coverage:</span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall ensure that all vehicles used for service
+                    delivery are appropriately insured for commercial use and
+                    covered under valid Third-Party Liability and
+                    Comprehensive Insurance Policies, including but not
+                    limited to Workmen's Compensation, Public Liability, and
+                    Goods in Transit (if applicable). SDA shall not be liable
+                    for any claims arising due to the Vendor's failure to
+                    maintain valid insurance coverage.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 7.4 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    7.4
+                    <span class="underline">
+                        Taxes and Government Levies:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    The Vendor shall bear sole responsibility for timely
+                    payment of all applicable taxes, levies, fees, penalties,
+                    or statutory dues in connection with its business
+                    operations, including but not limited to road tax, service
+                    tax, GST, permit charges, tolls, penalties, and other
+                    government-imposed charges.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 7.5 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    7.5
+                    <span class="underline">Evidence of Compliance:</span>
+                </p>
+                <p class="ml-4 text-xs">
+                    SDA reserves the right, at any time during the term of
+                    this Agreement, to request documentary proof or
+                    certifications from the Vendor to confirm adherence to the
+                    above compliance requirements. The Vendor shall promptly
+                    provide such documentation upon request, failing which SDA
+                    may withhold payments or suspend the engagement until
+                    compliance is confirmed.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 7.6 */} -->
+            <div class="ml-4 mb-4">
+                <p class="font-semibold mb-1 text-sm">
+                    7.6
+                    <span class="underline">
+                        Indemnity for Non-Compliance:
+                    </span>
+                </p>
+                <p class="ml-4 text-xs">
+                    Any damages, penalties, losses, or liabilities incurred by
+                    SDA due to the Vendor's non-compliance with any legal,
+                    regulatory, or insurance-related requirement shall be
+                    fully indemnified by the Vendor.
+                </p>
+            </div>
+
+            <!-- {/* Clause 8 */} -->
+            <h3 class="text-md font-bold mb-3">
+                8.
+                <span class="underline">TRANSFER AND SUB-LETTING</span>
+            </h3>
+
+            <!-- {/* Sub-clause 8.1 */} -->
+            <div class="ml-4 mb-4">
+                <p class="ml-4 text-xs">
+                    <span class="font-semibold mr-1">8.1</span> The Vendor
+                    shall not transfer, assign, delegate, or subcontract any
+                    of its rights, obligations, or interests under this
+                    Agreement, in whole or in part, to any third party without
+                    the prior written consent of SDA.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 8.2 */} -->
+            <div class="ml-4 mb-4">
+                <p class="ml-4 text-xs">
+                    <span class="font-semibold mr-1">8.2</span>
+                    Any attempted assignment or sub-letting without such prior
+                    written consent shall be null and void and shall
+                    constitute a material breach of this Agreement, entitling
+                    SDA to terminate the Agreement forthwith, without
+                    prejudice to any other rights or remedies available under
+                    law or equity.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 8.3 */} -->
+            <div class="ml-4 mb-4">
+                <p class="ml-4 text-xs">
+                    <span class="font-semibold mr-1">8.3</span>
+                    Notwithstanding any approved assignment or subcontracting,
+                    the Vendor shall remain fully responsible and liable for
+                    the performance of all obligations under this Agreement.
+                </p>
+            </div>
+
+            <!-- {/* Clause 9 */} -->
+            <h3 class="text-md font-bold mb-3">
+                9.
+                <span class="underline">MODIFICATION OF AGREEMENT</span>
+            </h3>
+
+            <!-- {/* Sub-clause 9.1 */} -->
+            <div class="ml-4 mb-4">
+                <p class="ml-4 text-xs">
+                    <span class="font-semibold mr-1">9.1</span> No
+                    amendment, modification, or supplement to this Agreement
+                    shall be valid or binding unless it is made in writing and
+                    signed by duly authorized representatives of both Parties.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 9.2 */} -->
+            <div class="ml-4 mb-4">
+                <p class="ml-4 text-xs">
+                    <span class="font-semibold mr-1">9.2</span> Such
+                    modifications may be executed by way of an addendum,
+                    letter agreement, or any other form of written
+                    correspondence explicitly stating the intention to amend
+                    this Agreement.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 9.3 */} -->
+            <div class="ml-4 mb-4">
+                <p class="ml-4 text-xs">
+                    <span class="font-semibold mr-1">9.3</span>Any valid
+                    modification so executed shall be deemed to form an
+                    integral part of this Agreement and shall have the same
+                    legal effect as if originally incorporated herein.
+                </p>
+            </div>
+
+            <!-- {/* Clause 10 */} -->
+            <h3 class="text-md font-bold mb-3">
+                10.
+                <span class="underline">
+                    JURISDICTION AND GOVERNING LAW
+                </span>
+            </h3>
+
+            <!-- {/* Sub-clause 10.1 */} -->
+            <div class="ml-4 mb-4">
+                <p class="ml-4 text-xs">
+                    <span class="font-semibold mr-1">10.1</span> This
+                    Agreement shall be governed by and construed in accordance
+                    with the laws of India.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 10.2 */} -->
+            <div class="ml-4 mb-4">
+                <p class="ml-4 text-xs">
+                    <span class="font-semibold mr-1">10.2</span> Any
+                    dispute, controversy, or claim arising out of or in
+                    connection with this Agreement, including its
+                    interpretation, performance, breach, or termination, shall
+                    be subject to the exclusive jurisdiction of the competent
+                    courts located in Gurugram, Haryana, India.
+                </p>
+            </div>
+
+            <!-- {/* Sub-clause 10.3 */} -->
+            <div class="ml-4 mb-4">
+                <p class="ml-4 text-xs">
+                    <span class="font-semibold mr-1">10.3</span> Each
+                    Party irrevocably submits to the jurisdiction of such
+                    courts and waives any objection to the venue or
+                    convenience of such forum.
+                </p>
+            </div>
+
+            <!-- {/* Clause 11 */} -->
+            <h3 class="text-md font-bold mb-3">
+                11. <span class="underline">FORCE MAJEURE</span>
+            </h3>
+
+            <div class="ml-4 mb-4">
+                <p class="text-xs">
+                    Neither Party shall be liable for any delay or failure to
+                    perform its obligations under this Agreement if such delay
+                    or failure is caused by an event beyond its reasonable
+                    control, including but not limited to acts of God, war,
+                    strikes, riots, pandemics, natural disasters, or
+                    governmental restrictions ("Force Majeure Event"). The
+                    affected Party shall notify the other Party promptly and
+                    take reasonable steps to mitigate the impact. If a Force
+                    Majeure Event continues for more than 30 days, either
+                    Party may terminate this Agreement without liability.
+                </p>
+            </div>
+
+            <!-- {/* Clause 12 */} -->
+            <h3 class="text-md font-bold mb-3">
+                12.
+                <span class="underline">
+                    NON-SOLICITATION / NON-COMPETE
+                </span>
+            </h3>
+
+            <div class="ml-4 mb-4">
+                <p class="text-xs">
+                    During the term of this Agreement and for a period of 12
+                    months thereafter, the Vendor shall not directly or
+                    indirectly solicit, engage, or provide similar services to
+                    any customer introduced or referred by SDA, without SDA's
+                    prior written consent.
+                </p>
+            </div>
+
+            <!-- {/* Clause 13 */} -->
+            <h3 class="text-md font-bold mb-3">
+                13. <span class="underline">ENTIRE AGREEMENT</span>
+            </h3>
+
+            <div class="ml-4 mb-4">
+                <p class="text-xs">
+                    This Agreement, including all annexures and schedules
+                    hereto, constitutes the entire agreement between the
+                    Parties with respect to the subject matter hereof and
+                    supersedes all prior understandings, representations, or
+                    agreements, whether written or oral.
+                </p>
+            </div>
+
+            <!-- {/* Clause 14 */} -->
+            <h3 class="text-md font-bold mb-3">
+                14. <span class="underline">SEVERABILITY</span>
+            </h3>
+
+            <div class="ml-4 mb-4">
+                <p class="text-xs">
+                    If any provision of this Agreement is held to be invalid,
+                    illegal, or unenforceable by a court of competent
+                    jurisdiction, the remaining provisions shall remain in
+                    full force and effect.
+                </p>
+            </div>
+
+            <!-- {/* Clause 15 */} -->
+            <h3 class="text-md font-bold mb-3">
+                15. <span class="underline">WAIVER</span>
+            </h3>
+
+            <div class="ml-4 mb-4">
+                <p class="text-xs">
+                    No failure or delay by either Party in exercising any
+                    right under this Agreement shall operate as a waiver of
+                    that right, nor shall any single or partial exercise of
+                    any right preclude any other or further exercise of that
+                    or any other right.
+                </p>
+            </div>
+
+            <!-- {/* Signatures */} -->
+            <div class="mt-12">
+                <h3 class="text-xs font-medium mb-8">
+                    <span class="font-semibold mr-1">
+                        IN WITNESS WHEREOF,
+                    </span>
+                    THE PARTIES have signed this Agreement in acceptance of
+                    all the terms and conditions stated hereinabove on the day
+                    and place mentioned above.
+                </h3>
+
+                <div class="grid grid-cols-2 gap-2 mb-4">
+                    <div class="text-left flex flex-col items-start justify-between gap-2">
+                        <p class="font-medium mb-1 text-xs">
+                            For and on behalf of
+                            <span class="font-bold">
+                                SureDrive Assist Private Limited
+                            </span>
+                        </p>
+                        <div class="space-y-1">
+                            <p class="text-xs mb-2">
+                                Authorized Signatory Name: ____________________
+                            </p>
+                            <p class="text-xs mb-2">Designation: Sales Head</p>
+                            <p class="text-xs mb-2">Date: ___________________</p>
+                            <p class="text-xs mb-2">Place: __________________</p>
+                        </div>
+                    </div>
+
+                    <div class="text-left flex flex-col items-start justify-between gap-2">
+                        <p class="font-medium mb-1 text-xs">
+                            For and on behalf of
+                            <span class="font-bold">
+
+                                VENDOR NAME
+                            </span>
+                        </p>
+                        <div class="space-y-1">
+                            <p class="text-xs mb-2">
+                                Authorized Signatory Name: ____________________
+                            </p>
+                            <p class="text-xs mb-2">Designation: __________________</p>
+                            <p class="text-xs mb-2">Date: ___________________</p>
+                            <p class="text-xs mb-2">Place: __________________</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="my-4 text-sm text-center">ANNEXURE I</h3>
+
+        <table class="border" cellpadding="5" width="100%"
+            style="border-collapse: collapse; font-family: Arial, sans-serif;">
+            <thead>
+                <tr>
+                    <th colspan="4" style="background-color: #000; color: white !important;" class="font-normal">GENERAL
+                        INFORMATION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-left">
+                    <td colspan="1" class="font-bold text-left w-20-percent">SDA ID</td>
+                    <td colspan="3" class=" w-20-percent"></td>
+                </tr>
+                <tr>
+                    <td colspan="1" class="font-bold text-left">GARAGE NAME</td>
+                    <td colspan="3" class=" w-20-percent"></td>
+                </tr>
+                <tr>
+                    <td colspan="1" class="font-bold text-left w-20-percent">CONTACT NUMBER</td>
+                    <td colspan="1" class=" w-20-percent"></td>
+                    <td colspan="1" class="font-bold text-left w-20-percent">ALTERNATE CONTACT NUMBER</td>
+                    <td colspan="1" class=" w-20-percent"></td>
+
+                </tr>
+                <tr>
+                    <td colspan="1" class="font-bold text-left">COMMUNICATION ADDRESS</td>
+                    <td colspan="3" class="font-bold text-left"> </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="font-bold text-left" style="height: 18px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="font-bold text-left" style="height: 18px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="font-bold text-left" style="width: 50%;"></td>
+                    <td colspan="1" class="font-bold text-left">PINCODE</td>
+                    <td colspan="1"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="1" class="font-bold text-left">WORK TIMINGS:</td>
+                    <td colspan="3"><strong></strong></td>
+                </tr>
+
+                <!--  -->
+
+                <table border="1" cellspacing="0" cellpadding="5"
+                    style="border-collapse: collapse; width: 100%; font-family: Arial, sans-serif;">
+                    <thead>
+                        <!-- WORK TIMINGS -->
+
+
+                        <!-- SERVICES PROVIDED title with (tick note) -->
+                        <tr>
+                            <td rowspan="3" style="width: 23.4%; vertical-align: top; font-weight: bold;"
+                                class="text-left">
+                                SERVICES PROVIDED<br>
+                                <div style="font-weight: normal; font-size: 0.85em; margin-top: 4px;">
+                                    (Tick Whichever is applicable)
+                                </div>
+                            </td>
+
+                            <!-- Empty cell for spacing -->
+                            <td style="width: 10%; text-align: right;"><input type="checkbox" /></td>
+
+                            <!-- RSA -->
+                            <td style="width: 25%; text-align: left; font-weight: bold;">RSA</td>
+
+                            <!-- Empty -->
+                            <td style="width: 10%; text-align: right;"><input type="checkbox" /></td>
+
+                            <!-- TOWING -->
+                            <td style="width: 25%; text-align: left; font-weight: bold;">TOWING</td>
+
+                            <!-- Empty right spacer -->
+                            <!-- <td style="width: 35%;"></td> -->
+                        </tr>
+
+                        <!-- 2-WHEELER row -->
+                        <tr>
+                            <td style="text-align: center;"></td>
+                            <td style="text-align: left; font-weight: bold;"> <input type="checkbox" /> 2-WHEELER</td>
+                            <td style="text-align: center;"></td>
+                            <td style="text-align: left; font-weight: bold;"><input type="checkbox" />2-WHEELER</td>
+
+                        </tr>
+
+                        <!-- 4-WHEELER row -->
+                        <tr>
+                            <td style="text-align: center;"></td>
+                            <td style="text-align: left; font-weight: bold;"> <input type="checkbox" />4-WHEELER</td>
+                            <td style="text-align: center;"></td>
+                            <td style="text-align: left; font-weight: bold;"><input type="checkbox" />4-WHEELER</td>
+
+                        </tr>
+
+                        <!-- 24x7 SERVICES -->
+                        <tr>
+                            <td style="font-weight: bold;" class="text-left">CAN YOU PROVIDE 24x7 SERVICES?</td>
+                            <td style="text-align: right;"><input type="checkbox" /></td>
+                            <td style="text-align: left; font-weight: bold;">YES</td>
+                            <td style="text-align: right;"><input type="checkbox" /></td>
+                            <td style="text-align: left; font-weight: bold;">NO</td>
+
+                        </tr>
+                </table>
+
+
+
+
+                <div class="mt-4" style="background-color: #000; color: #fff; padding: 4px; text-align: center;">
+                    BANK DETAILS
+                </div>
+                <table style="margin-top: 0px; border-top: 0px solid transparent;">
+                    <thead>
+                        <tr>
+                            <th colspan="5" class="text-left font-normal">The following information is required for us
+                                to process the payment. You can provide us with NEFT details for a
+                                speedier payment process.
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td colspan="1" class="font-bold text-left" style="width: 3%;">1</td>
+                        <td colspan="1" class="font-bold text-left">ACCOUNT HOLDER’S NAME</td>
+                        <td colspan="2" class="font-bold text-left" style="width: 75%;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="font-bold text-left" style="width: 3%;">2</td>
+                        <td colspan="1" class="font-bold text-left">BANK ACCOUNT NO
+                        </td>
+                        <td colspan="2" class="font-bold text-left" style="width: 75%;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="font-bold text-left" style="width: 3%;">3</td>
+                        <td colspan="1" class="font-bold text-left">NAME OF BANK:
+
+                        </td>
+                        <td colspan="2" class="font-bold text-left" style="width: 75%;"></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="1" class="font-bold text-left" style="width: 3%;">4</td>
+                        <td colspan="1" class="font-bold text-left">IFSC CODE:
+
+                        </td>
+                        <td colspan="2" class="font-bold text-left" style="width: 75%;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="font-bold text-left" style="width: 3%;">5</td>
+                        <td colspan="1" class="font-bold text-left">PAN CARD NUMBER:
+
+                        </td>
+                        <td colspan="2" class="font-bold text-left" style="width: 75%;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="font-bold text-left" style="width: 3%;">6</td>
+                        <td colspan="1" class="font-bold text-left"> GSTIN (If Registered):
+
+                        </td>
+                        <td colspan="2" class="font-bold text-left" style="width: 75%;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="1" class="font-bold text-left" style="width: 3%;">8</td>
+                        <td colspan="1" class="font-bold text-left">Business Address Proof (in Case of
+                            URD):
+
+
+                        </td>
+                        <td colspan="2" class="font-bold text-left" style="width: 75%;"> Yes / No</td>
+                    </tr>
+
+                </table>
+
+
+
+
+            </tbody>
+        </table>
+
+
+
+
+        <h3 class="my-4 text-sm text-center">ANNEXURE II</h3>
+        <table>
+            <tr>
+                <th colspan="7" style="text-align: left;">SERVICE RATE CARD: RSA CASES</th>
+            </tr>
+            <tr>
+                <th>Yes/No</th>
+                <th>Service Category</th>
+                <th colspan="2">Charges</th>
+                <th>Fixed Price Distance (KM)</th>
+                <th>Additional Price/Km</th>
+                <th>Waiting Charge</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Day</th>
+                <th>Night</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            <!-- Repeat these empty rows as needed -->
+            <tr>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+            </tr>
+            <tr>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+            </tr>
+            <tr>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+            </tr>
+            <tr>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+            </tr>
+            <tr>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+            </tr>
+            <tr>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+            </tr>
+            <tr>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+            </tr>
+            <tr>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+            </tr>
+            <tr>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+            </tr>
+            <tr>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+                <td class="py-4"></td>
+            </tr>
+
+        </table>
+
+        <p class="footer-text mt-20">
+            I hereby acknowledge the given information’s copies of documents are true and also agree to the rate card
+            that has been shared.
+        </p>
+
+        <p class="footer-text">
+            The Parties hereto have hereunto agreed on the agreement:
+        </p>
+
+        <div class="signature-section">
+            <div class="signature-box">
+                <p class="text-left"><span>For and on behalf of</span> <span class="font-bold underline">SureDrive
+                        Assist Private
+                        Limited</span></p>
+                <p class="my-2"><span class="font-bold">Authorized Signatory</span></p>
+                <p class="mb-2">Name: _______________</p>
+                <p class="mb-2">Designation: <span class="underline">Sales Head</span></p>
+                <p class="mb-2">Date: _______________</p>
+                <p class="mb-2">Place: _______________</p>
+            </div>
+
+            <div class="signature-box">
+                <p><span class="bold">For and on behalf of</span> _______________________</p>
+                <p class="my-2"><span class="font-bold">Authorized Signatory</span></p>
+                <p class="mb-2">Name: _______________</p>
+                <p class="mb-2">Designation: <span>_______________</span></p>
+                <p class="mb-2">Date: _______________</p>
+                <p class="mb-2">Place: _______________</p>
+            </div>
+        </div>
+
+
+
+    </div>
+</body>
+
+</html>
